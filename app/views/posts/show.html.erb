@@ -21,6 +21,16 @@
 <div>
   <span class="title">Posted:<%= @post.created_at.strftime("%D %T")%> by <%= @post.user.first_name%> <%= @post.user.last_name%>  </span>
 </div>
+<div>
+  <div class="favouriteStatus">
+    <% if current_user.favourite_post_ids.include? @post.id %>
+        <%= image_tag "/assets/starOn.png", class: "starImg"  %>
+    <% else %>
+        <span>Add to Favourite</span>
+        <%= link_to image_tag("/assets/starOff.png", class: "starImg"), mark_favourite_post_path(@post.id), class: "markFav", :remote => true %>
+    <% end %>
+  </div>
+</div>
 <button type="Post" id = "go_for_comment">Add Comment </button>
 <div class = "do_comment" style = "display:none">
 <pre class="txtDesc">
@@ -32,28 +42,25 @@
 <div id="show_comments" >
   <%= render :partial => "show_comments",:locals=>{:comments => @post.comments } %>
 </div>
-
-
 <%= link_to "<< Back to List View" %>
-
 <%= content_for :js do  %>
     <script type="text/javascript">
         $(document).ready(function(){
             $(function(){
-                    $('#comment').click(function(){
-                        var content = $("#content").val();
-                        if ($.trim(content) == "")
-                            displayFlash("Please add comment content", "alert-error");
-                        else{
-                            toggleDoms($(".formLoader"), $("#comment"));
-                            $.ajax({
-                                type: 'POST',
-                                url: '/comments',
-                                data: {content:content, post_id: '<%=@post.id%>'}
-                            });
-                        }
-                        $('.do_comment').hide();
-                    });
+                $('#comment').click(function(){
+                    var content = $("#content").val();
+                    if ($.trim(content) == "")
+                        displayFlash("Please add comment content", "alert-error");
+                    else{
+                        toggleDoms($(".formLoader"), $("#comment"));
+                        $.ajax({
+                            type: 'POST',
+                            url: '/comments',
+                            data: {content:content, post_id: '<%=@post.id%>'}
+                        });
+                    }
+                    $('.do_comment').hide();
+                });
 
                 $('#go_for_comment').click(function(){
                     $('.do_comment').show();
@@ -62,3 +69,7 @@
         });
     </script>
 <%end%>
+<%= content_for :js do %>
+    <%= javascript_include_tag "posts" %>
+<% end %>
+

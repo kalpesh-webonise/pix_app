@@ -4,7 +4,9 @@ $(document).ready(function(){
         showHideCats();
     });
 
-
+  $(document).on("click", '.favouriteStatus .markFav', function(){
+      $(".favouriteStatus ").html('<img src="/assets/starOn.png" class="starImg" alt="Staroff">');
+    });
 });
 function showHideCats(){
     var category_id = $("#post_category_id").val();

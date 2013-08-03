@@ -15,7 +15,11 @@ PixApp::Application.routes.draw do
     root to: "devise/sessions#new"
   end
 
-  resources :posts
+  resources :posts  do
+    member do
+      get :mark_favourite
+    end
+  end
   resources :comments
   resources :users
 #>>>>>>> 1788c2477a57e228c051e93905a0eb7e9070addd
