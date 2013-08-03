@@ -15,11 +15,7 @@ class Post < ActiveRecord::Base
 
   def self.fetch_posts params, user
     posts = select("id, title, location, user_id")
-    if user.favourite_post_ids.empty?
-      posts = posts.order("updated_at DESC")
-    else
-      posts = posts.order("FIELD(id #{user.favourite_post_ids.join(",")})")
-    end
+    posts = posts.order("updated_at DESC")
     posts = posts.where("category_id=?", params[:category_id]) if params[:category_id].present?
     posts = posts.where("sub_category_id=?", params[:sub_category_id]) if params[:sub_category_id].present?
     if params[:post_type].present?

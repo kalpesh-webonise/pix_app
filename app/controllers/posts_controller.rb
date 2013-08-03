@@ -43,7 +43,7 @@ class PostsController < ApplicationController
       @post.destroy
       respond_to do |format|
         flash[:success] = "Post deleted successfully"
-        format.html { redirect_to posts_url }
+        format.html { redirect_to "/" }
         format.json { head :no_content }
       end
 

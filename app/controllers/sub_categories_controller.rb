@@ -21,6 +21,7 @@ class SubCategoriesController < ApplicationController
   # POST /sub_categories
   # POST /sub_categories.json
   def create
+    @category = Category.find(params[:sub_category][:category_id])
     @sub_category = SubCategory.new(sub_category_params)
     #@category = Category.find(params[:category_id])
     #@sub_category = @category.sub_categories.new

@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     @user = User.new(:email=>params[:user][:email],:password=>@password,:first_name=>params[:user][:first_name],:last_name=>params[:user][:last_name])
       if @user.save
         UserMailer.delay.welcome_email(@user,@password)
+        flash[:notice] = "User created successfully"
         redirect_to "/users"
       else
         render "new"
