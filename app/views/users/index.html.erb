@@ -1,0 +1,24 @@
+<h3>Listing users</h3>
+<table class ="table table-bordered">
+  <thead>
+  <tr>
+    <th><center>User Email</center></th>
+    <th><center>Operations</center></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><center><%= user.email %></center></td>
+        <td><center><%= link_to 'Show', user,class: "btn btn-primary"%>
+          <%=link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%></center>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+
+  <%= link_to "New User",new_user_path,class: "btn btn-success"%>
+
+

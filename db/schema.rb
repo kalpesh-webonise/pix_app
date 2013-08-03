@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130803113242) do
+ActiveRecord::Schema.define(version: 20130803130148) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20130803113242) do
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree
   add_index "posts", ["sub_category_id"], name: "index_posts_on_sub_category_id", using: :btree
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "sub_categories", force: true do |t|
     t.string   "name"
@@ -68,6 +67,8 @@ ActiveRecord::Schema.define(version: 20130803113242) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_admin",                           default: false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

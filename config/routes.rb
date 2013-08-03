@@ -1,5 +1,9 @@
 PixApp::Application.routes.draw do
 
+  resources :sub_categories
+
+  resources :categories
+
   # Devise Routes
   # authenticated :user do
   #   root to: "posts#index"
@@ -10,6 +14,7 @@ PixApp::Application.routes.draw do
   end
 
   resources :posts
+  resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
