@@ -34,7 +34,9 @@
                     = current_user.email
                     %b.caret
                   %ul.dropdown-menu
+                    %li= link_to "Change Password/Update Profile", edit_user_path(current_user), method: :get
                     %li= link_to "Logout", destroy_user_session_path, method: :delete
+
           - else
             %a.brand{href: "/"} Portal for Information eXchange
     .container.body
