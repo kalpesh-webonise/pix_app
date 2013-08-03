@@ -1,0 +1,33 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *=# require bootstrap_and_overrides
+ *= require bootstrap
+ */
+.dn {display: none;}
+.container.body { padding-top: 50px; }
+footer {padding-top: 20px;}
+.field_with_errors input { border: 1px solid red !important; }
+.pageLoader {margin-bottom: 25px;}
+.fbImage {width: 50px; height: 50px;}
+.actionLoader{
+  background: url("/assets/loader-big.gif") no-repeat scroll center center  #FFFFFF;
+  display: none;
+  height: 100%;
+  left: 0;
+  opacity: 0.7;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+form.well {margin-top: 40px;}
+body {overflow-y: scroll;}
