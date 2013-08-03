@@ -1,4 +1,4 @@
 class Comment < ActiveRecord::Base
-  belogs_to :user
+  belongs_to :user
 
 end
