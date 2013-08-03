@@ -37,8 +37,22 @@ class PostsController < ApplicationController
     current_user.favourite_post_ids.uniq!
     current_user.save
     respond_to do |format|
-       format.js{ render nothing: true}
+      format.js{ render nothing: true}
     end
+  end
 
+  def destroy
+    @post = Post.find(params[:id])
+    if (current_user.is_admin || @post.user.id == current_user.id) && @post.present?
+      @post.destroy
+      respond_to do |format|
+        flash[:success] = "Post deleted successfully"
+        format.html { redirect_to posts_url }
+        format.json { head :no_content }
+      end
+
+    else
+      flash.now[:error] = "You can't delete a Post"
+    end
   end
 end
