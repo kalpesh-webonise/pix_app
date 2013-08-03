@@ -10,8 +10,6 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-   @sub_categories = Category.find(params[:id]).sub_categories
-   logger.info "############{@sub_categories.inspect}##################"
   end
 
 

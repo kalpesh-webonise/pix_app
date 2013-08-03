@@ -15,7 +15,7 @@
   </thead>
   <tbody>
 
-  <% @sub_categories.each do |sub_category| %>
+  <% @sub_categories[@category.id].each do |sub_category| %>
       <tr>
         <td><%= link_to sub_category.name, sub_category_path(sub_category) %></td>
         <td>
