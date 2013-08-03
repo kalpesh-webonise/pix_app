@@ -11,4 +11,18 @@ class CommentsController < ApplicationController
     @comments = Comment.where("post_id = ?", params[:post_id])
   end
 
+  def destroy
+    comment = Comment.find(params[:id])
+    post = comment.post
+    if  comment.present?
+      comment.destroy
+      respond_to do |format|
+        flash[:success] = "Comment deleted successfully"
+        format.html { redirect_to post_path(post) }
+        format.json { head :no_content }
+      end
+    else
+      flash.now[:error] = "You can't delete a Comment"
+    end
+  end
 end

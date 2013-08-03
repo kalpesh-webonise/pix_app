@@ -1,21 +1,25 @@
 <hr>
 <strong>Recent Comments</strong>
 <div>
-<%if comments.present? %>
-    <% comments.each do |comment| %>
+  <%if comments.present? %>
+      <% comments.each do |comment| %>
           <div class="well">
             <%= comment.content%>
-          <span class="pull-right">
+            <span class="pull-right">
             <span class="title">Posted:<%= comment.created_at.strftime("%D %T")%> by <%= comment.user.first_name%> <%= comment.user.last_name%>  </span>
+              <% if current_user.id == comment.user_id%>
+              <span><%=  link_to "Delete",comment, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+                <% end %>
+
           </span>
           </div>
 
-    <% end %>
-<%else%>
-  not present
-<%end%>
+      <% end %>
+  <%else%>
+      not present
+  <%end%>
 </div>
 <hr>
-
+<%= will_paginate comments %>
 
 
