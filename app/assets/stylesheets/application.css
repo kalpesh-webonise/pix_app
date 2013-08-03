@@ -43,3 +43,5 @@ body {overflow-y: scroll;}
 .page {margin: 10px;}
 .postsTable .title {min-width: 400px; max-width: 400px; width: 400px;}
 a.selected {font-weight: bold !important;}
+.starImg {width: 20px; height: 20px;}
+.favouriteStatus {margin-top: 20px;}

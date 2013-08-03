@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20130803184421) do
     t.boolean  "is_admin",                           default: false
     t.string   "first_name"
     t.string   "last_name"
+    t.text     "favourite_post_ids"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

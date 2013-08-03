@@ -1,12 +1,13 @@
 <h3 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
     xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
     xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-    xmlns="http://www.w3.org/1999/html"> Welcome User</h3>
+    xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"> Welcome User</h3>
 <div>
   Dear <%=@user.first_name%> <%=@user.last_name%>,</br>
 </div>
+<br>
 <div class ="adjust_mail">
-  Welcome to PIX – Portal for Information Xchange. With PIX, you can,</br>
+  Welcome to PIX – Portal for Information Xchange. With PIX, you can,
 </div>
 <div>
   <ul>
@@ -16,20 +17,16 @@
     <li>Posting comment on ads</li>
     <li>Marking ad as Favourite.</li>
   </ul>
-  Your account credentials are:</br>
-  Email:<b> <%=@user.email%></b></br>
-  Password:<b> <%=@password%></b></br>
-  <%= link_to "Click Here to access your account.",root_path %></br></br>
-  If you can't click the link above, you can copy the following address into your browser (in single line):</br>
-  <%=link_to "http://www.pix.com",root_path %></br></br>
-  We request you to change your access password after logging in for first time.</br>
-  <div class ="adjust_mail">
+  Your account credentials are:<br/>
+  Email:<b> <%=@user.email%></b><br/>
+  Password:<b> <%=@password%></b><br/>
+  <%= link_to "Click Here",root_path %>to access your account.<br/>
+  If you can't click the link above, you can copy the following address into your browser (in single line):<br/>
+  <%=link_to "http://www.pix.com",root_path %><br/>
+  We request you to change your access password after logging in for first time.<br/>
     DO NOT REPLY TO THIS MESSAGE
-  </div>
-  <div class ="adjust_mail">
-    Yours Sincerely,</br>
-    PIX Team
-  </div>
+    <p>Yours Sincerely,<br/>
+    PIX Team</p>
 </div>
 
 

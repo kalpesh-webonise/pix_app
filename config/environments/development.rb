@@ -39,3 +39,5 @@ PixApp::Application.configure do
   config.assets.debug = true
 
 end
+
+APP_ASSETS_URL = "http://local.pix.com/assets/"

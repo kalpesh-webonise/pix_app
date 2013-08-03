@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include ActiveModel::ForbiddenAttributesProtection
 
+  serialize :favourite_post_ids, Array
  # Setup accessible (or protected) attributes for your model
 
   has_many :posts, dependent: :destroy

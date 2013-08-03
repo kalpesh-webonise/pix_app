@@ -16,7 +16,11 @@ PixApp::Application.routes.draw do
   match "/dashboard/category/:category_id" => 'dashboards#show', via: [:get]
   match "/dashboard/sub_category/:sub_category_id" => 'dashboards#show', via: [:get]
 
-  resources :posts
+  resources :posts  do
+    member do
+      get :mark_favourite
+    end
+  end
   resources :comments
   resources :users
   resource :dashboard

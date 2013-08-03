@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
-  belongs_to :user, foreign_key: "owner_id"
+
   has_many :comments, dependent: :destroy
+  belongs_to :user, foreign_key: "user_id"
 
   validates :title, presence: true
   validates :description, presence: true
@@ -14,7 +15,7 @@ class Post < ActiveRecord::Base
 
   def self.fetch_posts params, user
     posts = select("id, title, location")
-    if true #user.favourite_post_ids.empty?
+    if user.favourite_post_ids.empty?
       posts = posts.order("updated_at DESC")
     else
       posts = posts.order("FIELD(id, #{user.favourite_post_ids.join(",")})")
