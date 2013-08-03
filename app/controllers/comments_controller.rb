@@ -9,7 +9,12 @@ class CommentsController < ApplicationController
     #raise error
     @comment = current_user.comments.new(content: params[:content], post_id: params[:post_id])
     if @comment.save
-      render js:create
+      owner = @comment.post.user
+      user = @comment.user
+      post_title = @comment.post.title
+      UserMailer.comment_mail(owner, user.first_name, post_title,@comment.content).deliver
+      respond_to do |format|
+      end
     else
       flash.now[:error] = "not created"
     end

@@ -22,6 +22,15 @@
   <span class="title">Posted:<%= @post.created_at.strftime("%D %T")%></span>
 </div>
 <div>
+
+  <div class="favouriteStatus">
+    <% if current_user.favourite_post_ids.include? @post.id %>
+        <%= image_tag "/assets/starOn.png", class: "starImg"  %>
+    <% else %>
+        <span>Add to Favourite</span>
+        <%= link_to image_tag("/assets/starOff.png", class: "starImg"), mark_favourite_post_path(@post.id), class: "markFav", :remote => true %>
+    <% end %>
+  </div>
   <hr>
   <strong>Recent Comments</strong>
   <div>
@@ -41,3 +50,6 @@
 </pre>
 
 <%= link_to "<< Back to List View" %>
+<%= content_for :js do %>
+    <%= javascript_include_tag "posts" %>
+<% end %>
