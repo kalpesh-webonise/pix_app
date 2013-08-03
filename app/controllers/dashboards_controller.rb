@@ -1,7 +1,5 @@
 class DashboardsController < ApplicationController
-  def index
-  end
-
   def show
+    @posts = Post.fetch_posts params, current_user
   end
 end

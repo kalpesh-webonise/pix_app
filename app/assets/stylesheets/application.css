@@ -32,6 +32,14 @@ footer {padding-top: 20px;}
 form.well {margin-top: 40px;}
 body {overflow-y: scroll;}
 
-.adjust_mail{
-    /*padding-top: 0 0 30px;*/
+.title{
+    padding-left: 30px;
+    padding-right: 430px;
 }
+.txtDesc{
+    width: 722px;
+}
+.postsTable table{margin-bottom: -1px !important;}
+.page {margin: 10px;}
+.postsTable .title {min-width: 400px; max-width: 400px; width: 400px;}
+a.selected {font-weight: bold !important;}

@@ -18,17 +18,16 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a{href: "#{current_user ? '/dashboard' : '/'}"}
+          %a{href: "/"}
             = image_tag "webonise.jpg", style: "width: 38px; height: 38px; margin-right: 5px;", class: "pull-left"
           - if current_user
             %a.brand{href: "/dashboard", class: "ajaxify"} Portal for Information eXchange
             .container.nav-collapse
               %ul.nav
                 - if current_user.is_admin
-                  %li{rel: "users"}= link_to "Users",users_path, class: "ajaxify"
-                  %li{rel: "categories"}= link_to "Categories", "/categories", class: "ajaxify"
-                  %li{rel: "posts"}= link_to "Posts", "/posts", class: "ajaxify"
-                  %li{rel: "sub_categories"}= link_to "Sub Categories", "/sub_categories", class: "ajaxify"
+                  %li{rel: "dashboards"}= link_to "Dashboard", "/dashboard"
+                  %li{rel: "users"}= link_to "Users",users_path
+                  %li{rel: "categories"}= link_to "Categories", "/categories"
               %ul.nav.pull-right
                 %li.dropdown
                   %a.dropdown-toggle{"data-toggle" => "dropdown", href: "javascript:void(0);"}
@@ -40,23 +39,33 @@
             %a.brand{href: "/"} Portal for Information eXchange
     .container.body
       .row
-        .span3
-          = image_tag "webonise.jpg", width: 120, style: "margin: 40px;"
-          - @categories.each do |category|
-            %ul.list-group
-              %li
-                = link_to category.name, "javascript: void(0);"
-                - @sub_categories[category.id].each do |sub_category|
-                  %ul.list-group
-                    %li= link_to sub_category.name, "javascript: void(0);"
-        .span8#contentBody
-          .actionLoader
-          = bootstrap_flash
-          = yield
+        - if current_user
+          .span3
+            = image_tag "webonise.jpg", width: 120, style: "margin: 10px 40px;"
+            - @categories.each do |category|
+              %ul.list-group
+                %li
+                  = link_to category.name, "/dashboard/category/#{category.id}", id: "category#{category.id}"
+                  - @sub_categories[category.id].each do |sub_category|
+                    %ul.list-group
+                      %li= link_to sub_category.name, "/dashboard/sub_category/#{sub_category.id}", id: "subCategory#{sub_category.id}"
+          .span8#contentBody
+            .actionLoader
+            = bootstrap_flash
+            = yield
+        - else
+          .span12#contentBody
+            = bootstrap_flash
+            = yield
       %footer
         %p
           \© Portal for Information eXchange #{Time.now.year}
     %a{href: "javascript:void(0)", class: "btn btn-primary disabled back-to-top", style: "position: fixed; bottom: 30px; right: 0px; border-top-right-radius:0px; border-bottom-right-radius:0px; cursor: pointer;"}Back to Top
-    .dn.activeTab= params[:controller]
+    .dn
+      .activeTab= params[:controller]
     = javascript_include_tag "application"
     = yield :js
+    - if params[:category_id].present?
+      = javascript_tag("highlightFilter('category#{params[:category_id]}');")
+    - elsif params[:sub_category_id].present?
+      = javascript_tag("highlightFilter('subCategory#{params[:sub_category_id]}');")

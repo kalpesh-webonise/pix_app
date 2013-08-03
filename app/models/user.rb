@@ -10,5 +10,6 @@ class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  #attr_accessible :email, :password, :password_confirmation, :remember_me
+  validates :first_name, :last_name, presence: true
+
 end

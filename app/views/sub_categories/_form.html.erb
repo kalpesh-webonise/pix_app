@@ -8,8 +8,8 @@
   <div class="control-group">
     <%= f.label :category_id, :class => 'control-label' %>
     <div class="controls">
-      <%#= f.text_field :category_id, :class => 'text_field' %>
-      <%= f.select(:category_id, @categories.collect {|p| [ p.name, p.id ] }, {}, {id: "post_category_id"})%>
+      <%= f.label @category.name, :class => 'control-label' %>
+      <%= f.hidden_field :category_id, :value => @category.id %>
     </div>
   </div>
 

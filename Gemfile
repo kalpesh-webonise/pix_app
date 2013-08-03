@@ -31,6 +31,7 @@ gem 'twitter-bootstrap-rails'
 gem 'haml'
 gem 'mysql2'
 gem 'therubyracer'
+gem "kaminari"
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -3,8 +3,6 @@ $(document).ready(function(){
     $('#post_category_id').click(function(){
         showHideCats();
     });
-
-
 });
 function showHideCats(){
     var category_id = $("#post_category_id").val();

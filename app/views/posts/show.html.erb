@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h1>Detail of Post</h1>
+</div>
+<div>
+  <span class="title"><strong> <%= @post.title %></strong></span>
+<span>
+ <strong>Location: <%= @post.location %></strong>
+</span>
+</div>
+<pre class="txtDesc">
+<div>
+  <%= @post.description %>
+</div></pre>
+<div>
+  <span class="title"><strong>Name:</strong> <%= @post.name%></span>
+  <span><strong>Contact Number:</strong> <%= @post.contact_number%></span>
+</div>
+<div>
+  <span class="title"><strong>Price:</strong> <%= @post.price%></span>
+</div>
+<div>
+  <span class="title">Posted:<%= @post.created_at.strftime("%D %T")%></span>
+</div>
+<div>
+  <hr>
+  <strong>Recent Comments</strong>
+  <div>
+  <%@comments.each do |comment| %>
+    <%= comment.content%>
+  <% end %>
+  </div>
+  <hr>
+  <button class="btn btn-primary large" id="comment" type="button">Comment</button>
+</div>
+<pre class="txtDesc">
+   <%= form_tag("/comments", method: "post",:remote => true) do%>
+     <%= text_area_tag(:content) %>
+      <%= hidden_field_tag(:post_id,@post.id)%>
+      <%= submit_tag "Create Comment"%>
+  <% end %>
+</pre>
+
+<%= link_to "<< Back to List View", request.referer %>

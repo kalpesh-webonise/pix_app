@@ -10,7 +10,10 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+   @sub_categories = Category.find(params[:id]).sub_categories
+   logger.info "############{@sub_categories.inspect}##################"
   end
+
 
   # GET /categories/new
   def new
@@ -28,7 +31,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
+        format.html { redirect_to '/categories', notice: 'Category was successfully created.' }
         format.json { render action: 'show', status: :created, location: @category }
       else
         format.html { render action: 'new' }

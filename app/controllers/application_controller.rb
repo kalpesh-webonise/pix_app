@@ -7,16 +7,17 @@ class ApplicationController < ActionController::Base
   before_filter :fetch_required_items
 
   def fetch_required_items
-    if current_user
+    if current_user && !request.xhr?
       @categories = Category.select("id, name")
       @sub_categories = SubCategory.select("id, name, category_id").group_by(&:category_id)
     end
   end
 
-  def require_admin
+  def require_admin!
     unless current_user || current_user.is_admin
       respond_to do |format|
         format.html {
+          flash[:alert] = "Access denied"
           redirect_to "/"
         }
         format.js {
@@ -24,10 +25,6 @@ class ApplicationController < ActionController::Base
         }
       end
     end
-  end
-
-  def after_sign_in_path_for(resource)
-    "/posts"
   end
 
   %w(user category sub_category post).each do |name|

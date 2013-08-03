@@ -1,18 +1,23 @@
 PixApp::Application.routes.draw do
 
+  #resources :jobs
+
   resources :sub_categories
   resources :categories
 
   # Devise Routes
   authenticated :user do
-    match '/' => 'dashboard#index', via: [:get]
+    match '/' => 'dashboards#show', via: [:get]
   end
   devise_for :users
   devise_scope :user do
     root to: "devise/sessions#new"
   end
+  match "/dashboard/category/:category_id" => 'dashboards#show', via: [:get]
+  match "/dashboard/sub_category/:sub_category_id" => 'dashboards#show', via: [:get]
 
   resources :posts
+  resources :comments
   resources :users
   resource :dashboard
   # The priority is based upon order of creation: first created -> highest priority.
