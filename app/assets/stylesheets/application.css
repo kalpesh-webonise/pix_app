@@ -39,5 +39,9 @@ body {overflow-y: scroll;}
 .txtDesc{
     width: 722px;
 }
+.postsTable table{margin-bottom: -1px !important;}
+.page {margin: 10px;}
+.postsTable .title {min-width: 400px; max-width: 400px; width: 400px;}
+a.selected {font-weight: bold !important;}
 .starImg {width: 20px; height: 20px;}
 .favouriteStatus {margin-top: 20px;}

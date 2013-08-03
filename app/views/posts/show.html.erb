@@ -42,8 +42,9 @@
 <div id="show_comments" >
   <%= render :partial => "show_comments",:locals=>{:comments => @post.comments } %>
 </div>
-<%= link_to "<< Back to List View" %>
+<%= link_to "<< Back to List View", request.referer %>
 <%= content_for :js do  %>
+    <%= javascript_include_tag "posts" %>
     <script type="text/javascript">
         $(document).ready(function(){
             $(function(){
@@ -68,8 +69,4 @@
             })
         });
     </script>
-<%end%>
-<%= content_for :js do %>
-    <%= javascript_include_tag "posts" %>
 <% end %>
-

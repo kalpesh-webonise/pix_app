@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130803162913) do
+ActiveRecord::Schema.define(version: 20130803184421) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20130803162913) do
 
   create_table "posts", force: true do |t|
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.boolean  "share"
     t.integer  "user_id"
     t.integer  "sub_category_id"

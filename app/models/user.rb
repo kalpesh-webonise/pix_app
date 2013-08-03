@@ -8,8 +8,9 @@ class User < ActiveRecord::Base
   serialize :favourite_post_ids, Array
  # Setup accessible (or protected) attributes for your model
 
-  has_many :posts
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
-  #attr_accessible :email, :password, :password_confirmation, :remember_me
+  validates :first_name, :last_name, presence: true
+
 end

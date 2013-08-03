@@ -3,7 +3,10 @@
     <li class='active'>Posts not found</li>
 <% else %>
   <div class='page-header'>
-    <h1> Users </h1>
-  <div class='postsTable'>
+    <h1> Posts </h1>
+  </div>
+<div class="postsTable">
+  <%= render "/dashboard/posts", posts: @posts %>
+</div>
 <% end %>
 <span id="pathname" class='dn'><%= request.path %></span>

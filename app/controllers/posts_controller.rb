@@ -1,17 +1,11 @@
 class PostsController < ApplicationController
+  before_action :find_post, only: [:show]
   def index
-    @posts = []
-
+    @posts = Post.page(params[:page])
   end
 
   def show
-    @post = Post.find(params[:id])
-    #respond_to do |format|
-    #  format.html #show.html
-    #  format.js
-    #  format.json { render :json => @host }
-    #end
-    #@all_comments = @post.comments
+    @comments = @post.comments
   end
 
   #def show_comments
@@ -20,14 +14,13 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.new
-    get_categories_sub_categories
   end
 
   def create
     @post = current_user.posts.new(params[:post].permit!)
     if @post.save
       flash[:success] = "Post created successfully"
-      redirect_to posts_path
+      redirect_to "/dashboard"
     else
       get_categories_sub_categories
       render 'new'

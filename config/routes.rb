@@ -3,17 +3,18 @@ PixApp::Application.routes.draw do
   #resources :jobs
 
   resources :sub_categories
-
   resources :categories
 
   # Devise Routes
-  # authenticated :user do
-  #   root to: "posts#index"
-  # end
+  authenticated :user do
+    match '/' => 'dashboards#show', via: [:get]
+  end
   devise_for :users
   devise_scope :user do
     root to: "devise/sessions#new"
   end
+  match "/dashboard/category/:category_id" => 'dashboards#show', via: [:get]
+  match "/dashboard/sub_category/:sub_category_id" => 'dashboards#show', via: [:get]
 
   resources :posts  do
     member do
@@ -22,7 +23,7 @@ PixApp::Application.routes.draw do
   end
   resources :comments
   resources :users
-#>>>>>>> 1788c2477a57e228c051e93905a0eb7e9070addd
+  resource :dashboard
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

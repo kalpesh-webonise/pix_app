@@ -1,0 +1,15 @@
+<table class ="table table-bordered table-striped">
+  <tbody>
+    <% posts.each do |post| %>
+      <tr>
+        <td rowspan="2" class="title"><%= post.title %></td>
+        <td>Location: <%= post.location %></td>
+      </tr>
+      <tr>
+        <td><%= link_to "View details", post_path(post) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to_next_page posts, 'View more', class: "page", remote: true %>
+<%= image_tag "loader-mini.gif", class: "page dn" %>

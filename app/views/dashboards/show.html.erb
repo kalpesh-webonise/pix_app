@@ -1,0 +1,6 @@
+Welcome <strong><%= current_user.email %></strong>
+<%= link_to "Post your ad", "/posts/new", class: "btn btn-primary pull-right" %>
+<div class="clearfix" style="margin-top: 20px;"></div>
+<div class="postsTable">
+  <%= render "posts", posts: @posts %>
+</div>
