@@ -6,8 +6,17 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments
+    #respond_to do |format|
+    #  format.html #show.html
+    #  format.js
+    #  format.json { render :json => @host }
+    #end
+    #@all_comments = @post.comments
   end
+
+  #def show_comments
+  #
+  #end
 
   def new
     logger.info "###########################{current_user.inspect}"
@@ -16,7 +25,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.new(params[:post].permit!)
+    @post = current_user.posts.new(params[:post].permit!)
     if @post.save
       flash[:success] = "Post created successfully"
       redirect_to posts_path

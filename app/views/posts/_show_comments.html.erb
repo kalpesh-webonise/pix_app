@@ -1,0 +1,21 @@
+<hr>
+<strong>Recent Comments</strong>
+<div>
+<%if comments.present? %>
+    <% comments.each do |comment| %>
+          <div class="well">
+            <%= comment.content%>
+          <div class=pull-right>
+            <span class="title">Posted:<%= comment.created_at.strftime("%D %T")%> by <%= comment.user.first_name%> <%= comment.user.last_name%>  </span>
+          </div>
+          </div>
+
+    <% end %>
+<%else%>
+  not present
+<%end%>
+</div>
+<hr>
+
+
+

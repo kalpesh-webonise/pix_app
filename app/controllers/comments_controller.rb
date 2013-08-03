@@ -5,13 +5,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    logger.info "##########################{params.inspect}"
-    #raise error
-    @comment = current_user.comments.new(content: params[:content], post_id: params[:post_id])
-    if @comment.save
-      render js:create
-    else
-      flash.now[:error] = "not created"
-    end
+    @comment = current_user.comments.create(content: params[:content], post_id: params[:post_id])
+    @comments = Comment.where("post_id = ?", params[:post_id])
   end
 end
