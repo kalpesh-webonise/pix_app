@@ -1,3 +1,7 @@
+<%= html_errors(@post) %>
+<div class="page-header">
+  <h1>Create Post</h1>
+</div>
 <%= render 'form', post: @post,categories: @categories, subcategories: @subcategories %>
 <%= content_for :js do %>
     <%= javascript_include_tag "posts" %>

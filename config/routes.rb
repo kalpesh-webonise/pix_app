@@ -1,5 +1,9 @@
 PixApp::Application.routes.draw do
 
+  resources :sub_categories
+
+  resources :categories
+
   # Devise Routes
   # authenticated :user do
   #   root to: "posts#index"
