@@ -12,6 +12,7 @@
 //= require twitter/bootstrap/bootstrap-button
 //= require twitter/bootstrap/bootstrap-dropdown
 //= require twitter/bootstrap/bootstrap-collapse
+//= require posts
 //= require jquery.history
 $(document).ready(function(){
   $(".back-to-top").hide();

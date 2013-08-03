@@ -34,7 +34,7 @@
                     = display_name current_user
                     %b.caret
                   %ul.dropdown-menu
-                    %li= link_to "Change Password/Update Profile", edit_user_path(current_user), method: :get
+                    %li= link_to "Update Profile", edit_user_path(current_user), method: :get
                     %li= link_to "Logout", destroy_user_session_path, method: :delete
 
           - else
@@ -42,13 +42,14 @@
     .container.body
       .row
         - if current_user
-          .span3
+          .span3.well
             = link_to image_tag("webonise-logo.png", width: 210, style: "margin: 11px 5px;"), "/dashboard"
             %hr
-            = link_to "My Favourite Ads", "/dashboard/posts/favourite", id: "favouriteFilter"
-            %br
-            = link_to "My Ads", "/dashboard/posts/my_ads", id: "myAdFilter"
-            %hr
+            - unless current_user.is_admin
+              = link_to "My Favourite Ads", "/dashboard/posts/favourite", id: "favouriteFilter"
+              %br
+              = link_to "My Ads", "/dashboard/posts/my_ads", id: "myAdFilter"
+              %hr
             - @categories.each do |category|
               %ul.list-group
                 %li

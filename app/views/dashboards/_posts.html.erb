@@ -6,8 +6,12 @@
         <td>Location: <%= post.location %></td>
       </tr>
       <tr>
-        <td><%= link_to "View details", post_path(post) %></td>
-        <td><%=  link_to "delete post",post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to "View details", post_path(post) %>
+          <% if current_user.is_admin || post.user.id == current_user.id %>
+            <%= link_to image_tag("deletePost.gif"), post, method: :delete, data: { confirm: 'Are you sure?' }, class: "deletePost pull-right" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

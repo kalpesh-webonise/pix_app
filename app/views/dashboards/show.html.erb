@@ -1,5 +1,8 @@
 Welcome <strong><%= display_name current_user %></strong>
+<% unless current_user.is_admin %>
 <%= link_to "Post your ad", "/posts/new", class: "btn btn-primary pull-right" %>
+<% end %>
+
 <div class="clearfix" style="margin-top: 20px;"></div>
 <div class="postsTable">
   <%= render "posts", posts: @posts %>
