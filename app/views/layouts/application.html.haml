@@ -44,13 +44,19 @@
         - if current_user
           .span3
             = image_tag "webonise.jpg", width: 120, style: "margin: 10px 40px;"
-            - @categories.each do |category|
-              %ul.list-group
-                %li
-                  = link_to category.name, "/dashboard/category/#{category.id}", id: "category#{category.id}"
-                  - @sub_categories[category.id].each do |sub_category|
-                    %ul.list-group
-                      %li= link_to sub_category.name, "/dashboard/sub_category/#{sub_category.id}", id: "subCategory#{sub_category.id}"
+            -if @categories.present?
+              - @categories.each do |category|
+                %ul.list-group
+                  %li
+                    = link_to category.name, "/dashboard/category/#{category.id}", id: "category#{category.id}"
+                    -#-if @sub_categories.present?
+                    -#  - @sub_categories[category.id].each do |sub_category|
+                    -#    %ul.list-group
+                    -#      %li= link_to sub_category.name, "/dashboard/sub_category/#{sub_category.id}", id: "subCategory#{sub_category.id}"
+                    -#-else
+                    -#  %h3 Please Add Sub Categories
+            -else
+              %h3 Please Add Categories
           .span8#contentBody
             .actionLoader
             = bootstrap_flash

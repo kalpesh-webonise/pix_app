@@ -1,28 +1,30 @@
 <div class="page-header">
   <h1>Detail of Post</h1>
 </div>
-<div>
-  <span class="title"><strong> <%= @post.title %></strong></span>
-<span>
- <strong>Location: <%= @post.location %></strong>
-</span>
+<div class="clearfix">
+    <span class="pull-left"><strong> <%= @post.title %></strong></span>
+    <span class="pull-right">
+     <strong>Location: <%= @post.location %></strong>
+    </span>
 </div>
-<pre class="txtDesc">
-<div>
+
+<div class="postDesc">
   <%= @post.description %>
-</div></pre>
-<div>
-  <span class="title"><strong>Name:</strong> <%= @post.name%></span>
-  <span><strong>Contact Number:</strong> <%= @post.contact_number%></span>
+</div>
+
+<div class="clearfix">
+  <span class="pull-left"><strong>Name:</strong> <%= @post.name%></span>
+  <span class="pull-right"><strong>Contact Number:</strong> <%= @post.contact_number%></span>
 </div>
 <div>
-  <span class="title"><strong>Price:</strong> <%= @post.price%></span>
+  <span><strong>Price:</strong> <%= @post.price%></span>
 </div>
 <div>
-  <span class="title">Posted:<%= @post.created_at.strftime("%D %T")%> by <%= @post.user.first_name%> <%= @post.user.last_name%>  </span>
+  <span>Posted:<%= @post.created_at.strftime("%D %T")%> by <%= @post.user.first_name%> <%= @post.user.last_name%>  </span>
 </div>
-<div>
+<div class="clearfix addCommentWrap">
   <div class="favouriteStatus">
+    Add to favorite
     <% if current_user.favourite_post_ids.include? @post.id %>
         <%= image_tag "/assets/starOn.png", class: "starImg"  %>
     <% else %>
@@ -30,14 +32,15 @@
         <%= link_to image_tag("/assets/starOff.png", class: "starImg"), mark_favourite_post_path(@post.id), class: "markFav", :remote => true %>
     <% end %>
   </div>
-</div>
+
 <button type="Post" id = "go_for_comment">Add Comment </button>
+</div>
 <div class = "do_comment" style = "display:none">
-<pre class="txtDesc">
+<div class="addComment">
      <textarea id="content" rows = "4" cols = "50"> </textarea>
   <button type="Post" id = "comment">Comment </button>
   <%= image_tag "loader-mini.gif", class: "formLoader dn" %>
-</pre>
+</div>
 </div>
 <div id="show_comments" >
   <%= render :partial => "show_comments",:locals=>{:comments => @post.comments } %>

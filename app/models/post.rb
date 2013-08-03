@@ -22,6 +22,14 @@ class Post < ActiveRecord::Base
     end
     posts = posts.where("category_id=?", params[:category_id]) if params[:category_id].present?
     posts = posts.where("sub_category_id=?", params[:sub_category_id]) if params[:sub_category_id].present?
+    if params[:post_type].present?
+      if params[:post_type] == "favourite"
+        posts = posts.where("id IN (?)", user.favourite_post_ids)
+      else
+        posts = posts.where("user_id = ?", user.id)
+      end
+    end
+
     posts = posts.page(params[:page]).per(10)
     posts
   end

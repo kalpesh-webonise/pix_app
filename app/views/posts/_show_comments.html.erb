@@ -3,11 +3,9 @@
 <div>
 <%if comments.present? %>
     <% comments.each do |comment| %>
-          <div class="well">
-            <%= comment.content%>
-          <span class="pull-right">
-            <span class="title">Posted:<%= comment.created_at.strftime("%D %T")%> by <%= comment.user.first_name%> <%= comment.user.last_name%>  </span>
-          </span>
+          <div class="commentBox">
+            <span><%= comment.content%></span>
+          <span class="postedInfo">Posted:<%= comment.created_at.strftime("%D %T")%> by <%= comment.user.first_name%> <%= comment.user.last_name%> </span>
           </div>
 
     <% end %>

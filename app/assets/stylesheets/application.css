@@ -36,12 +36,47 @@ body {overflow-y: scroll;}
     padding-left: 30px;
     padding-right: 430px;
 }
-.txtDesc{
-    width: 722px;
+.postDesc{
+    margin: 0 0 10px;
+    padding: 10px;
+    height: 80px;
+    border: 1px solid #999;
+    border-radius: 6px;
 }
 .postsTable table{margin-bottom: -1px !important;}
 .page {margin: 10px;}
 .postsTable .title {min-width: 400px; max-width: 400px; width: 400px;}
 a.selected {font-weight: bold !important;}
-.starImg {width: 20px; height: 20px;}
-.favouriteStatus {margin-top: 20px;}
+.addCommentWrap{
+    margin: 15px 0 0;
+}
+.starImg {
+    margin: -6px 0 0 5px;
+    vertical-align: middle;
+    display: inline-block;
+    width: 20px;
+    height: 20px;}
+.favouriteStatus {
+    float: right;
+}
+
+.commentBox{
+    margin: 0 0 15px;
+    padding: 5px;;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+.commentBox span{
+    display: block;
+}
+.commentBox span.postedInfo{
+    text-align: right;
+}
+.addComment{
+    margin: 10px 0;
+}
+.addComment textarea{
+    display: block;
+    width: 600px;
+}
+

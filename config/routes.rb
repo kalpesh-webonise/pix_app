@@ -15,6 +15,7 @@ PixApp::Application.routes.draw do
   end
   match "/dashboard/category/:category_id" => 'dashboards#show', via: [:get]
   match "/dashboard/sub_category/:sub_category_id" => 'dashboards#show', via: [:get]
+  match "/dashboard/posts/:post_type" => 'dashboards#show', via: [:get]
 
   resources :posts  do
     member do
@@ -22,7 +23,11 @@ PixApp::Application.routes.draw do
     end
   end
   resources :comments
-  resources :users
+  resources :users do
+    collection do
+      get :show_my_posts
+    end
+  end
   resource :dashboard
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
