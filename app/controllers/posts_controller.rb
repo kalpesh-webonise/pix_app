@@ -6,8 +6,17 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments
+    #respond_to do |format|
+    #  format.html #show.html
+    #  format.js
+    #  format.json { render :json => @host }
+    #end
+    #@all_comments = @post.comments
   end
+
+  #def show_comments
+  #
+  #end
 
   def new
     @post = current_user.posts.new
