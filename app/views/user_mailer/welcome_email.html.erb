@@ -20,9 +20,9 @@
   Your account credentials are:<br/>
   Email:<b> <%=@user.email%></b><br/>
   Password:<b> <%=@password%></b><br/>
-  <%= link_to "Click Here",root_path %>to access your account.<br/>
+  <%= link_to "Click Here", edit_user_url(@user.id) %>  to access your account.<br/>
   If you can't click the link above, you can copy the following address into your browser (in single line):<br/>
-  <%=link_to "http://www.pix.com",root_path %><br/>
+  <%=link_to edit_user_url(@user.id), edit_user_url(@user.id) %><br/>
   We request you to change your access password after logging in for first time.<br/>
     DO NOT REPLY TO THIS MESSAGE
     <p>Yours Sincerely,<br/>

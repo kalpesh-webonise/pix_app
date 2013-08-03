@@ -1,12 +1,7 @@
 Welcome <strong><%= display_name current_user %></strong>
-<%if current_user.is_admin %>
-<%#= link_to "Post your ad", "/posts/new", class: "btn btn-primary pull-right" %>
-<%else%>
-    <%= link_to "Post your ad", "/posts/new", class: "btn btn-primary pull-right" %>
-    <%if @my_posts.present? %>
-        <%= link_to "Show my posts", "/dashboard/posts/my_post", class: "btn btn-primary " %>
-    <%end%>
-<%end%>
+<% unless current_user.is_admin %>
+<%= link_to "Post your ad", "/posts/new", class: "btn btn-primary pull-right" %>
+<% end %>
 <div class="clearfix" style="margin-top: 20px;"></div>
 <div class="postsTable">
   <%= render "posts", posts: @posts %>

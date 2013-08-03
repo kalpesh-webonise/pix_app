@@ -34,7 +34,7 @@
                     = display_name current_user
                     %b.caret
                   %ul.dropdown-menu
-                    %li= link_to "Change Password/Update Profile", edit_user_path(current_user), method: :get
+                    %li= link_to "Update Profile", edit_user_path(current_user), method: :get
                     %li= link_to "Logout", destroy_user_session_path, method: :delete
 
           - else
@@ -42,21 +42,21 @@
     .container.body
       .row
         - if current_user
-          .span3
-            = image_tag "webonise.jpg", width: 120, style: "margin: 10px 40px;"
-            -if @categories.present?
-              - @categories.each do |category|
-                %ul.list-group
-                  %li
-                    = link_to category.name, "/dashboard/category/#{category.id}", id: "category#{category.id}"
-                    -#-if @sub_categories.present?
-                    -#  - @sub_categories[category.id].each do |sub_category|
-                    -#    %ul.list-group
-                    -#      %li= link_to sub_category.name, "/dashboard/sub_category/#{sub_category.id}", id: "subCategory#{sub_category.id}"
-                    -#-else
-                    -#  %h3 Please Add Sub Categories
-            -else
-              %h3 Please Add Categories
+          .span3.well
+            = link_to image_tag("webonise-logo.png", width: 210, style: "margin: 11px 5px;"), "/dashboard"
+            %hr
+            - unless current_user.is_admin
+              = link_to "My Favourite Ads", "/dashboard/posts/favourite", id: "favouriteFilter"
+              %br
+              = link_to "My Ads", "/dashboard/posts/my_ads", id: "myAdFilter"
+              %hr
+            - @categories.each do |category|
+              %ul.list-group
+                %li
+                  = link_to category.name, "/dashboard/category/#{category.id}", id: "category#{category.id}"
+                  - @sub_categories[category.id].each do |sub_category|
+                    %ul.list-group
+                      %li= link_to sub_category.name, "/dashboard/sub_category/#{sub_category.id}", id: "subCategory#{sub_category.id}"
           .span8#contentBody
             .actionLoader
             = bootstrap_flash

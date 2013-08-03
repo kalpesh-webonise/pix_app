@@ -45,8 +45,9 @@ body {overflow-y: scroll;}
 }
 .postsTable table{margin-bottom: -1px !important;}
 .page {margin: 10px;}
-.postsTable .title {min-width: 400px; max-width: 400px; width: 400px;}
+.postsTable .title {min-width: 385px; max-width: 385px; width: 385px;}
 a.selected {font-weight: bold !important;}
+
 .addCommentWrap{
     margin: 15px 0 0;
 }
@@ -79,4 +80,3 @@ a.selected {font-weight: bold !important;}
     display: block;
     width: 600px;
 }
-

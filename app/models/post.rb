@@ -14,7 +14,7 @@ class Post < ActiveRecord::Base
   validates_numericality_of :price, :contact_number
 
   def self.fetch_posts params, user
-    posts = select("id, title, location")
+    posts = select("id, title, location, user_id")
     if user.favourite_post_ids.empty?
       posts = posts.order("updated_at DESC")
     else
