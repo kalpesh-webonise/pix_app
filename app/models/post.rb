@@ -29,8 +29,8 @@ class Post < ActiveRecord::Base
         posts = posts.where("user_id = ?", user.id)
       end
     end
-    self.per_page = 10
-    #posts = posts.page(params[:page]).per(10)
+
+    posts = posts.page(params[:page]).per(10)
     posts
   end
 end
