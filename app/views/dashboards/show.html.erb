@@ -1,4 +1,4 @@
-Welcome <strong><%= current_user.email %></strong>
+Welcome <strong><%= display_name current_user %></strong>
 <%if current_user.is_admin %>
 <%#= link_to "Post your ad", "/posts/new", class: "btn btn-primary pull-right" %>
 <%else%>

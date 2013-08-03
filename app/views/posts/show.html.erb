@@ -43,7 +43,7 @@
 </div>
 </div>
 <div id="show_comments" >
-  <%= render :partial => "show_comments",:locals=>{:comments => @post.comments } %>
+  <%= render :partial => "show_comments",:locals=>{:comments => @post.comments.paginate(:page => params[:page], :per_page => 3,:order => 'created_at DESC')} %>
 </div>
 <%= link_to "<< Back to List View", request.referer %>
 <%= content_for :js do  %>

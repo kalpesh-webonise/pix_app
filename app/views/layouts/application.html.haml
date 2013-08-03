@@ -31,7 +31,7 @@
               %ul.nav.pull-right
                 %li.dropdown
                   %a.dropdown-toggle{"data-toggle" => "dropdown", href: "javascript:void(0);"}
-                    = current_user.email
+                    = display_name current_user
                     %b.caret
                   %ul.dropdown-menu
                     %li= link_to "Change Password/Update Profile", edit_user_path(current_user), method: :get
@@ -75,5 +75,9 @@
     = yield :js
     - if params[:category_id].present?
       = javascript_tag("highlightFilter('category#{params[:category_id]}');")
-    - elsif params[:sub_category_id].present?
+    - if params[:sub_category_id].present?
       = javascript_tag("highlightFilter('subCategory#{params[:sub_category_id]}');")
+    - if params[:post_type] == "favourite"
+      = javascript_tag("highlightFilter('favouriteFilter');")
+    - if params[:post_type] == "my_ads"
+      = javascript_tag("highlightFilter('myAdFilter');")
