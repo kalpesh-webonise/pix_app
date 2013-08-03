@@ -1,0 +1,4 @@
+<%= render 'form', post: @post,categories: @categories, subcategories: @subcategories %>
+<%= content_for :js do %>
+    <%= javascript_include_tag "posts" %>
+<% end %>

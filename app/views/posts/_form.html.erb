@@ -1,0 +1,49 @@
+<%= form_for post,url: posts_path,method: post do |f|%>
+
+    <div class="control-group clearfix">
+      <label for="field1">Select Category<span class="mandatory-field">*</span></label>
+      <%= f.select(:category_id, categories.collect {|p| [ p.name, p.id ] }, {}, {id: "post_category_id"})%>
+    </div>
+
+    <div class="control-group clearfix disabledSelect">
+      <label for="field1">Select Subcategory<span class="mandatory-field">*</span></label>
+      <% subcategories.each do |key, sub_categories| %>
+          <%= f.select(:sub_category_id, sub_categories.collect {|p| [ p.name, p.id ] }, {}, {id: "catID#{key}", disabled: true} )%>
+      <% end %>
+    </div>
+    <div class="control-group clearfix">
+      <label for="field1">Type<span class="mandatory-field">*</span></label>
+      <% [ 'Available','Required'].each do |share| %>
+          <%= f.radio_button(:share, share)%>
+          <%= share.humanize  %>
+      <% end %>
+    </div>
+    <div class="control-group clearfix">
+      <label for="field1">Enter title <span class="mandatory-field">*</span></label>
+      <%= f.text_field :title ,:id => "title" %>
+    </div>
+    <div class="control-group">
+      <label for="field2"></span>Description<span class="mandatory-field">*</span></label>
+      <%= f.text_area :description,:id => "description" %>
+    </div>
+
+    <div class="control-group">
+      <label for="field2">Location<span class="mandatory-field">*</span></label>
+      <%= f.text_field :location,:id => "location" %>
+    </div>
+    <div class="control-group">
+      <label for="field3">Price<span class="mandatory-field">*</span></label>
+      <%= f.text_field :price ,:id => "price"%>
+    </div>
+    <div class="control-group">
+      <label for="field3">Name<span class="mandatory-field">*</span></label>
+      <%= f.text_field :name ,:id => "name"%>
+    </div>
+    <div class="control-group">
+      <label for="field3">Contact Number<span class="mandatory-field">*</span></label>
+      <%= f.text_field :contact_number ,:id => "contact_number"%>
+    </div>
+
+    <button class="btn btn-primary large" id="post_create" type="submit">Submit</button>
+    <span class="or">or <%= link_to "Cancel"%></span>
+<% end %>

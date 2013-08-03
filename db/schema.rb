@@ -11,7 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130803075925) do
+ActiveRecord::Schema.define(version: 20130803113242) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.string   "content"
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.text     "recipient_ids"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "posts", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.boolean  "share"
+    t.integer  "user_id"
+    t.integer  "sub_category_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "location"
+    t.integer  "price"
+    t.string   "name"
+    t.string   "contact_number"
+  end
+
+  add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree
+  add_index "posts", ["sub_category_id"], name: "index_posts_on_sub_category_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "sub_categories", force: true do |t|
+    t.string   "name"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                              default: "",    null: false

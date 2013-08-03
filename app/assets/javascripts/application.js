@@ -35,24 +35,13 @@ $(document).ready(function(){
       if(window_url != current_url)
         sendUpdateRequest(window_url);
     });
-    $(document).on("click", "a.ajaxify", function(e){
-      e.preventDefault();
-      var url=$(this).attr("href");
-      sendUpdateRequest(url);
-    });
+//    $(document).on("click", "a.ajaxify", function(e){
+//      e.preventDefault();
+//      var url=$(this).attr("href");
+//      sendUpdateRequest(url);
+//    });
   }
-  /* Users.js */
-  $(document).on("click", ".statusBtn", function() {
-    var result;
-    if ($(this).hasClass("btn-inverse")) {
-      result = confirm("Are you sure to block this User?");
-      if (result)
-        changeStatus($(this), "block");
-    } else
-      changeStatus($(this), "unblock");
-  });
-
-  var offset = 280, duration = 500;
+   var offset = 280, duration = 500;
   $(window).scroll(function() {
     $(this).scrollTop() > offset ? $('.back-to-top').fadeIn(duration) : $('.back-to-top').fadeOut(duration);
   });
@@ -81,22 +70,6 @@ function toggleDoms(show, hide){
   show.show();
   hide.hide();
 }
-/* Users.js */
-function changeStatus(link, status) {
-  toggleDoms(link.next("img").show(), link);
-  $.ajax({
-    url: "/users/" + link.attr("user_id") + "/change_status",
-    dataType: "script",
-    data: {
-      status: status
-    },
-    type: "PUT",
-    error: function(response) {
-      alert("Error occurred! Unable to complete request");
-      return toggleDoms(link, link.next("img"));
-    }
-  });
-};
 function updatePage(body, title, tab, url, notice, message){
   $("#contentBody").html(body);
   $(".navbar .container ul.nav li").removeClass("active");
@@ -120,15 +93,4 @@ function displayFlash(message, type){
   else
     $(flash).insertAfter(".actionLoader");
   $(".actionLoader").hide();
-}
-function parseAndShowFriends(friends_json){
-  var user_friends = jQuery.parseJSON(friends_json), record = '';
-  $.each(user_friends, function(index, friend){
-    record = "<tr>";
-    record += "<td><img alt='User Image' class='fbImage' src='"+ friend['image'] +"'></td>";
-    record += "<td>"+ friend['first_name'] +"</td>";
-    record += "<td>"+ friend['last_name'] +"</td>";
-    record += "</tr>";
-    $("table.friendsTable tbody").append(record);
-  });
 }
