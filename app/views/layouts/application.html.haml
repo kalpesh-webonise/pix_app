@@ -18,12 +18,13 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
+          %a{href: "#{current_user ? '/dashboard' : '/'}"}
+            = image_tag "webonise.jpg", style: "width: 38px; height: 38px; margin-right: 5px;", class: "pull-left"
           - if current_user
-            %a.brand{href: "/posts", class: "ajaxify"} Portal for Information eXchange
+            %a.brand{href: "/dashboard", class: "ajaxify"} Portal for Information eXchange
             .container.nav-collapse
               %ul.nav
                 - if current_user.is_admin
-
                   %li{rel: "users"}= link_to "Users",users_path, class: "ajaxify"
                   %li{rel: "categories"}= link_to "Categories", "/categories", class: "ajaxify"
                   %li{rel: "posts"}= link_to "Posts", "/posts", class: "ajaxify"
@@ -39,7 +40,16 @@
             %a.brand{href: "/"} Portal for Information eXchange
     .container.body
       .row
-        .span12#contentBody
+        .span3
+          = image_tag "webonise.jpg", width: 120, style: "margin: 40px;"
+          - @categories.each do |category|
+            %ul.list-group
+              %li
+                = link_to category.name, "javascript: void(0);"
+                - @sub_categories[category.id].each do |sub_category|
+                  %ul.list-group
+                    %li= link_to sub_category.name, "javascript: void(0);"
+        .span8#contentBody
           .actionLoader
           = bootstrap_flash
           = yield

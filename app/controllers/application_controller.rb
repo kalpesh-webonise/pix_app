@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :authenticate_user!
+  before_filter :fetch_required_items
+
+  def fetch_required_items
+    if current_user
+      @categories = Category.select("id, name")
+      @sub_categories = SubCategory.select("id, name, category_id").group_by(&:category_id)
+    end
+  end
 
   def require_admin
     unless current_user || current_user.is_admin

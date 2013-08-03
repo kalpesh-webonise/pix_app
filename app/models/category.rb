@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
   has_many :sub_categories, dependent: :destroy
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   validates :name, presence: true
 end
