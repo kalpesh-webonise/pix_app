@@ -31,3 +31,7 @@ footer {padding-top: 20px;}
 }
 form.well {margin-top: 40px;}
 body {overflow-y: scroll;}
+
+.adjust_mail{
+    /*padding-top: 0 0 30px;*/
+}

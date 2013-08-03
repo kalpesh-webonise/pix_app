@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include ActiveModel::ForbiddenAttributesProtection
 
-  # Setup accessible (or protected) attributes for your model
+ # Setup accessible (or protected) attributes for your model
+
+  has_many :posts
+  has_many :comments
+
   #attr_accessible :email, :password, :password_confirmation, :remember_me
 end

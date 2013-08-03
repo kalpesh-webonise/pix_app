@@ -4,14 +4,12 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    logger.info "##########################{@users.inspect}"
   end
 
   def show
   end
 
   def new
-    #params[:user].permit!
     @user = User.new
   end
 
@@ -21,13 +19,12 @@ class UsersController < ApplicationController
 
   def create
     @password= SecureRandom.hex[0,8]
-    @user = User.new(:email=>params[:user][:email],:password=>@password)
+    @user = User.new(:email=>params[:user][:email],:password=>@password,:first_name=>params[:user][:first_name],:last_name=>params[:user][:last_name])
       if @user.save
-        UserMailer.welcome_email(params[:user][:email],@password).deliver
+        UserMailer.welcome_email(@user,@password).deliver
         redirect_to "/users"
       else
         redirect_to "/users/new"
-        #format.json { render json: @user.errors, status: :unprocessable_entity }
     end
   end
 

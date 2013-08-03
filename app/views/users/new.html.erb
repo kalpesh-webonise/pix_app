@@ -1,11 +1,25 @@
 <h3>New user</h3>
 
-<%= form_for @user ,:url => users_path,:method => :post,:html=>{:class=>'form-horizontal',:style=>"padding-left: 300px"} do |f| %>
+<%= form_for @user ,:url => users_path,:method => :post,:html=>{:class=>'form-horizontal'} do |f| %>
 
     <div class="control-group">
       <%= f.label :use_email,:class => "control-label"%><br />
       <div class= "controls">
         <%= f.text_field :email,:class=>"resize_text" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :first_name,:class => "control-label"%><br />
+      <div class= "controls">
+        <%= f.text_field :first_name,:class=>"resize_text" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :last_name,:class => "control-label"%><br />
+      <div class= "controls">
+        <%= f.text_field :last_name,:class=>"resize_text" %>
       </div>
     </div>
     <%= f.submit `Create User`,class: "btn  btn-primary" %>

@@ -1,8 +1,9 @@
 class UserMailer < ActionMailer::Base
   default from: "from@example.com"
 
-  def welcome_email(email,password)
+  def welcome_email(user,password)
     @password = password
-    mail(:to =>email,:subject=>"Registered Successfully",:content_type=>"text/html" )
+    @user =user
+    mail(:to =>user.email,:subject=>"Registered Successfully",:content_type=>"text/html" )
   end
 end
