@@ -1,5 +1,4 @@
 <%= form_for post,url: posts_path,method: post do |f|%>
-
     <div class="control-group clearfix">
       <label for="field1">Select Category<span class="mandatory-field">*</span></label>
       <%= f.select(:category_id, categories.collect {|p| [ p.name, p.id ] }, {}, {id: "post_category_id"})%>
@@ -13,10 +12,11 @@
     </div>
     <div class="control-group clearfix">
       <label for="field1">Type<span class="mandatory-field">*</span></label>
-      <% [ 'Available','Required'].each do |share| %>
-          <%= f.radio_button(:share, share)%>
-          <%= share.humanize  %>
-      <% end %>
+
+      <%= f.radio_button(:share, 0)%>
+      Available
+      <%= f.radio_button(:share, 1)%>
+      Required
     </div>
     <div class="control-group clearfix">
       <label for="field1">Enter title <span class="mandatory-field">*</span></label>

@@ -23,8 +23,9 @@
             .container.nav-collapse
               %ul.nav
                 - if current_user.is_admin
-                  %li{rel: "users"}= link_to "Categories", "/categories", class: "ajaxify"
-                  %li{rel: "categories"}= link_to "Posts", "/posts", class: "ajaxify"
+                  %li{rel: "categories"}= link_to "Categories", "/categories", class: "ajaxify"
+                  %li{rel: "posts"}= link_to "Posts", "/posts", class: "ajaxify"
+                  %li{rel: "sub_categories"}= link_to "Sub Categories", "/sub_categories", class: "ajaxify"
               %ul.nav.pull-right
                 %li.dropdown
                   %a.dropdown-toggle{"data-toggle" => "dropdown", href: "javascript:void(0);"}

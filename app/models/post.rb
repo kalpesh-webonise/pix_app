@@ -12,4 +12,6 @@ class Post < ActiveRecord::Base
   validates :price, presence: true
   validates :name, presence: true
   validates :contact_number, presence: true
+ validates :share, :inclusion => { :in => ["0", "1"], message: "Invalid data"}
+  validates_numericality_of :price, :contact_number
 end
