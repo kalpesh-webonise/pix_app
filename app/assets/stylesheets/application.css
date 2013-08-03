@@ -39,3 +39,7 @@ body {overflow-y: scroll;}
 .txtDesc{
     width: 722px;
 }
+.adjust_mail{
+    /*padding-top: 0 0 30px;*/
+}
+

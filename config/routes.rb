@@ -1,6 +1,6 @@
 PixApp::Application.routes.draw do
 
-  resources :jobs
+  #resources :jobs
 
   resources :sub_categories
 
@@ -17,6 +17,8 @@ PixApp::Application.routes.draw do
 
   resources :posts
   resources :comments
+  resources :users
+#>>>>>>> 1788c2477a57e228c051e93905a0eb7e9070addd
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

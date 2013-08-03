@@ -14,23 +14,26 @@ class SubCategoriesController < ApplicationController
 
   # GET /sub_categories/new
   def new
-    @sub_category = SubCategory.new
-    @categories = Category.select("id, name")
+    @category = Category.find(params[:category_id])
+    @sub_category = @category.sub_categories.new
   end
 
   # GET /sub_categories/1/edit
   def edit
-    @categories = Category.select("id, name")
+    #@categories = Category.select("id, name")
+    @category = @sub_category.category
   end
 
   # POST /sub_categories
   # POST /sub_categories.json
   def create
     @sub_category = SubCategory.new(sub_category_params)
+    #@category = Category.find(params[:category_id])
+    #@sub_category = @category.sub_categories.new
 
     respond_to do |format|
       if @sub_category.save
-        format.html { redirect_to @sub_category, notice: 'Sub category was successfully created.' }
+        format.html { redirect_to '/categories', notice: 'Sub category was successfully created.' }
         format.json { render action: 'show', status: :created, location: @sub_category }
       else
         @categories = Category.select("id, name")
@@ -45,7 +48,7 @@ class SubCategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @sub_category.update(sub_category_params)
-        format.html { redirect_to @sub_category, notice: 'Sub category was successfully updated.' }
+        format.html { redirect_to  '/categories', notice: 'Sub category was successfully updated.' }
         format.json { head :no_content }
       else
         @categories = Category.select("id, name")
