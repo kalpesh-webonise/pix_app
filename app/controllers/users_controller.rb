@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin!
-  #authorize! :create, current_user, :message => 'Not authorized as an administrator'
+  before_action :require_admin!, except: [:edit, :update, :show]
 
   def index
     @users = User.all
@@ -35,8 +34,9 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
 
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      if @user.update_with_password(user_params)
+        sign_in @user, :bypass => true
+        format.html { redirect_to edit_user_path(@user), notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -58,6 +58,6 @@ class UsersController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params[:user].permit!
+      params[:user].permit([:first_name, :last_name, :current_password, :password, :password_confirmation])
     end
 end
