@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin!
-    unless current_user || current_user.is_admin
+    if !current_user || !current_user.is_admin
       respond_to do |format|
         format.html {
           flash[:alert] = "Access denied"
