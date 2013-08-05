@@ -14,10 +14,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin!
-    if !current_user || !current_user.is_admin
+    unless current_user && current_user.is_admin
+      flash[:alert] = "Access denied"
       respond_to do |format|
         format.html {
-          flash[:alert] = "Access denied"
           redirect_to "/"
         }
         format.js {
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   %w(user category sub_category post).each do |name|
     define_method "find_#{name}" do
-      obj = instance_variable_set("@#{name}", name.capitalize.constantize.find_by_id(params[:id]))
+      obj = instance_variable_set("@#{name}", name.camelize.constantize.find_by_id(params[:id]))
       unless obj
         respond_to do |format|
           format.html{
