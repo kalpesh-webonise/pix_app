@@ -54,7 +54,7 @@
               %ul.list-group
                 %li
                   = link_to category.name, "/dashboard/category/#{category.id}", id: "category#{category.id}"
-                  - @sub_categories[category.id].each do |sub_category|
+                  - (@sub_categories[category.id] || []).each do |sub_category|
                     %ul.list-group
                       %li= link_to sub_category.name, "/dashboard/sub_category/#{sub_category.id}", id: "subCategory#{sub_category.id}"
           .span8#contentBody

@@ -51,4 +51,13 @@ class PostsController < ApplicationController
       flash.now[:error] = "You can't delete a Post"
     end
   end
+
+  def edit
+
+  end
+
+  def update
+  @post = Post.find(params[:id])
+  @post.update_attribute()
+  end
 end
