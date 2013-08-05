@@ -5,3 +5,19 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.create(first_name: "Webonise", last_name: "Lab", email: "admin@weboniselab.com", password: "pix6186", password_confirmation: "pix6186", is_admin: true) if User.count == 0
+if Category.count == 0
+  c1 = Category.create(name: "Real Estate")
+  SubCategory.create(name: "Rent Flat/Room", category_id: c.id)
+  SubCategory.create(name: "Flatmate/Roommate", category_id: c.id)
+
+  c2 = Category.create(name: "Household Stuff")
+  SubCategory.create(name: "Electronic Item", category_id: c2.id)
+  SubCategory.create(name: "Funniture", category_id: c2.id)
+  SubCategory.create(name: "Other Stuff", category_id: c2.id)
+
+  c3 = Category.create(name: "Vehicles")
+  SubCategory.create(name: "2 Wheeler", category_id: c3.id)
+  SubCategory.create(name: "4 Wheeler", category_id: c3.id)
+end

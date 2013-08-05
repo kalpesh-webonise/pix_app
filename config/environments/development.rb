@@ -37,7 +37,7 @@ PixApp::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  #config.cache_store = :mem_cache_store, Memcached::Rails.new('localhost:11211')
+  config.cache_store = :mem_cache_store, "localhost"
 
 end
-
-APP_ASSETS_URL = "http://local.pix.com/assets/"
