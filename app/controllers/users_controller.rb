@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @password= SecureRandom.hex[0,8]
     @user = User.new(:email=>params[:user][:email],:password=>@password,:first_name=>params[:user][:first_name],:last_name=>params[:user][:last_name])
       if @user.save
-        UserMailer.welcome_email(@user,@password).deliver
+        UserMailer.delay.welcome_email(@user,@password)
         flash[:notice] = "User created successfully"
         redirect_to "/users"
       else

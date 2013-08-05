@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "pix@weboniselab.com"
 
   def welcome_email(user,password)
     @password = password

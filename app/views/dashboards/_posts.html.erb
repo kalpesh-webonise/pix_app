@@ -10,7 +10,7 @@
           <%= link_to "View details", post_path(post) %>
           <% if current_user.is_admin || post.user.id == current_user.id %>
             <%= link_to image_tag("deletePost.gif"), post, method: :delete, data: { confirm: 'Are you sure?' }, class: "deletePost pull-right" %>
-              <%= link_to "Edit details",  edit_post_path(post) %>
+              <%= link_to "Edit details","#" %>
           <% end %>
         </td>
       </tr>

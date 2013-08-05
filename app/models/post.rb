@@ -1,9 +1,10 @@
 class Post < ActiveRecord::Base
   belongs_to :user, foreign_key: "user_id"
   has_many :comments, dependent: :destroy
+  mount_uploader :image, AvatarUploader
 
-  validates :title, :description, :category_id, :sub_category_id, :location, :price, :name, :contact_number, presence: true
-  validates_numericality_of :price, :contact_number
+  #validates :title, :description, :category_id, :sub_category_id, :location, :price, :name, :contact_number, presence: true
+  #validates_numericality_of :price, :contact_number
 
   def self.fetch_posts params, user
     posts = select("id, title, location, user_id").order("updated_at DESC")
