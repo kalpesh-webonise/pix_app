@@ -31,6 +31,27 @@ $(document).ready(function(){
   $(document).on("click", "a.page", function(){
     toggleDoms($("a.page"), $("img.page"));
   });
+  $(".addImage").click(function(){
+      var emptyFlag=false, len = $('.imageFiles input[type="file"]').length;
+      $('.imageFiles').find("input[type='file']").each(function(){
+      if($.trim($(this).val()) == "")
+        emptyFlag = true;
+    });
+    if(emptyFlag)
+      alert("");
+    else
+      $(".imageFiles").append('<div class="controls"><input name="post[photos_attributes]['+ new Date().getTime() +'][image]" type="file"><a href="javascript:void(0);" class="removeImg">Remove Image</a></div>');
+    if (len == 4)
+      $(".addImage").hide();
+  });
+  $(document).on("click", ".removeImg", function(){
+    var len = $('.imageFiles input[type="file"]').length;
+    var result = confirm("Are you sure?");
+    if(result)
+      $(this).parent().remove();
+    if (len < 4)
+      $(".addImage").show();
+  });
 });
 function toggleDoms(show, hide){
   show.show();

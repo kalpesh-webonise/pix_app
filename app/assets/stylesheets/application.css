@@ -80,3 +80,7 @@ a.selected {font-weight: bold !important;}
     display: block;
     width: 600px;
 }
+
+.add_more_image{
+    margin: -6px 0 0 -90px;
+}

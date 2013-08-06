@@ -21,6 +21,7 @@ PixApp::Application.routes.draw do
     member do
       get :mark_favourite
     end
+    resources :photos, :only => [:create, :destroy]
   end
   resources :comments
   resources :users do
