@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  %w(user category sub_category post).each do |name|
+  %w(user category sub_category post comment).each do |name|
     define_method "find_#{name}" do
       obj = instance_variable_set("@#{name}", name.camelize.constantize.find_by_id(params[:id]))
       unless obj
