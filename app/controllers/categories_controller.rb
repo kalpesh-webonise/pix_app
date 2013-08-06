@@ -5,7 +5,9 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.select("id, name")
+    @categories = Rails.cache.fetch("dbCat#{@system_setting.value['category']}", expires_in: 1.week) {
+      Category.select("id, name").to_a
+    }
   end
 
   # GET /categories/1

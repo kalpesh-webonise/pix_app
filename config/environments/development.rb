@@ -14,14 +14,6 @@ PixApp::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :sendmail
-  #config.action_mailer.smtp_settings = {
-  #    :address              => "smtp.gmail.com",
-  #    :port                 => 587,
-  #    :domain               => 'mail.weboniselab.com',
-  #    :user_name            => 'pansingh@weboniselab.com',
-  #    :password             => 'pansingh6186',
-  #    :authentication       => 'plain',
-  #    :enable_starttls_auto => true  }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -37,7 +29,8 @@ PixApp::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  #config.cache_store = :mem_cache_store, Memcached::Rails.new('localhost:11211')
+  config.cache_store = :mem_cache_store, "localhost"
+  config.eager_load = false
 
 end
-
-APP_ASSETS_URL = "http://local.pix.com/assets/"

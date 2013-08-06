@@ -9,16 +9,16 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *=# require bootstrap_and_overrides
  *= require bootstrap
+ *= require bootstrap-lightbox.min.css
  */
-.dn {display: none;}
-.container.body { padding-top: 50px; }
-footer {padding-top: 20px;}
-.field_with_errors input, .field_with_errors textarea { border: 1px solid red !important; }
-.pageLoader {margin-bottom: 25px;}
-.fbImage {width: 50px; height: 50px;}
-.actionLoader{
+ .dn {display: none;}
+ .container.body { padding-top: 50px; }
+ footer {padding-top: 20px;}
+ .field_with_errors input, .field_with_errors textarea { border: 1px solid red !important; }
+ .pageLoader {margin-bottom: 25px;}
+ .fbImage {width: 50px; height: 50px;}
+ .actionLoader{
   background: url("/assets/loader-big.gif") no-repeat scroll center center  #FFFFFF;
   display: none;
   height: 100%;
@@ -33,15 +33,15 @@ form.well {margin-top: 40px;}
 body {overflow-y: scroll;}
 
 .title{
-    padding-left: 30px;
-    padding-right: 430px;
+  padding-left: 30px;
+  padding-right: 430px;
 }
 .postDesc{
-    margin: 0 0 10px;
-    padding: 10px;
-    height: 80px;
-    border: 1px solid #999;
-    border-radius: 6px;
+  margin: 0 0 10px;
+  padding: 10px;
+  height: 80px;
+  border: 1px solid #999;
+  border-radius: 6px;
 }
 .postsTable table{margin-bottom: -1px !important;}
 .page {margin: 10px;}
@@ -49,38 +49,44 @@ body {overflow-y: scroll;}
 a.selected {font-weight: bold !important;}
 
 .addCommentWrap{
-    margin: 15px 0 0;
+  margin: 15px 0 0;
 }
-.starImg {
-    margin: -6px 0 0 5px;
-    vertical-align: middle;
-    display: inline-block;
-    width: 20px;
-    height: 20px;}
+img.starImg {
+  margin: -6px 0 0 5px;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
 .favouriteStatus {
-    float: right;
+  float: right;
 }
-
 .commentBox{
-    margin: 0 0 15px;
-    padding: 5px;;
-    border: 1px solid #999;
-    border-radius: 4px;
+  margin: 0 0 15px;
+  padding: 5px;;
+  border: 1px solid #999;
+  border-radius: 4px;
 }
 .commentBox span{
-    display: block;
+  display: block;
 }
 .commentBox span.postedInfo{
-    text-align: right;
+  text-align: right;
 }
 .addComment{
-    margin: 10px 0;
+  margin: 10px 0;
 }
 .addComment textarea{
-    display: block;
-    width: 600px;
+  display: block;
+  width: 600px;
 }
+
 
 .add_more_image{
     margin: -6px 0 0 -90px;
 }
+
+.companyImg { width: 38px; height: 38px; margin-right: 5px; }
+.companyImgThumb { width: 210px; height: 36px; margin: 11px 5px; }
+.miniDelete {width: 22px;}
+

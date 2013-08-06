@@ -7,24 +7,24 @@ PixApp::Application.routes.draw do
 
   # Devise Routes
   authenticated :user do
-    match '/' => 'dashboards#show', via: [:get]
+    get '/' => 'dashboards#show'
   end
   devise_for :users
   devise_scope :user do
     root to: "devise/sessions#new"
   end
-  match "/dashboard/category/:category_id" => 'dashboards#show', via: [:get]
-  match "/dashboard/sub_category/:sub_category_id" => 'dashboards#show', via: [:get]
-  match "/dashboard/posts/:post_type" => 'dashboards#show', via: [:get]
 
-  resources :posts  do
-    member do
-      get :mark_favourite
-    end
+  get "/dashboard/category/:category_id" => 'dashboards#show'
+  get "/dashboard/sub_category/:sub_category_id" => 'dashboards#show'
+  get "/dashboard/posts/:post_type" => 'dashboards#show'
+  get "/comments/:id/older/:post_id" => 'comments#older'
+
+  resources :posts, except: [:index]  do
+    put 'mark_favourite' => 'posts#mark_favourite'
     resources :photos, :only => [:create, :destroy]
   end
   resources :comments
-  resources :users do
+  resources :users, except: [:show] do
     collection do
       get :show_my_posts
     end

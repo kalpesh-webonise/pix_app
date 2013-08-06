@@ -19,12 +19,12 @@
             %span.icon-bar
             %span.icon-bar
           %a{href: "/"}
-            = image_tag "webonise.jpg", style: "width: 38px; height: 38px; margin-right: 5px;", class: "pull-left"
+            = image_tag "webonise.jpg", class: "companyImg pull-left"
           - if current_user
-            %a.brand{href: "/dashboard", class: "ajaxify"} Portal for Information eXchange
+            %a.brand{href: "/dashboard"} Portal for Information eXchange
             .container.nav-collapse
-              %ul.nav
-                - if current_user.is_admin
+              - if current_user.is_admin
+                %ul.nav
                   %li{rel: "dashboards"}= link_to "Dashboard", "/dashboard"
                   %li{rel: "users"}= link_to "Users",users_path
                   %li{rel: "categories"}= link_to "Categories", "/categories"
@@ -43,20 +43,21 @@
       .row
         - if current_user
           .span3.well
-            = link_to image_tag("webonise-logo.png", width: 210, style: "margin: 11px 5px;"), "/dashboard"
+            = link_to image_tag("webonise-logo.png", class: "companyImgThumb"), "/dashboard"
             %hr
             - unless current_user.is_admin
               = link_to "My Favourite Ads", "/dashboard/posts/favourite", id: "favouriteFilter"
               %br
               = link_to "My Ads", "/dashboard/posts/my_ads", id: "myAdFilter"
               %hr
-            - @categories.each do |category|
-              %ul.list-group
-                %li
-                  = link_to category.name, "/dashboard/category/#{category.id}", id: "category#{category.id}"
-                  - (@sub_categories[category.id] || []).each do |sub_category|
-                    %ul.list-group
-                      %li= link_to sub_category.name, "/dashboard/sub_category/#{sub_category.id}", id: "subCategory#{sub_category.id}"
+            - cache("viewCatSubCat#{@system_setting.value['category']}#{@system_setting.value['sub_category']}") do
+              - @categories.each do |category|
+                %ul.list-group
+                  %li
+                    = link_to category.name, "/dashboard/category/#{category.id}", id: "category#{category.id}"
+                    - (@sub_categories[category.id] || []).each do |sub_category|
+                      %ul.list-group
+                        %li= link_to sub_category.name, "/dashboard/sub_category/#{sub_category.id}", id: "subCategory#{sub_category.id}"
           .span8#contentBody
             .actionLoader
             = bootstrap_flash
