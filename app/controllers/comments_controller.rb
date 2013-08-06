@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :find_comment, only: [:destroy]
 
   def new
     @comment = Comment.new
@@ -9,24 +10,20 @@ class CommentsController < ApplicationController
   end
 
   def create
-    comment = current_user.comments.create(content: params[:content], post_id: params[:post_id])
-    owner, post = comment.post.user, comment.post
-    UserMailer.delay.comment_mail(owner, current_user.first_name, post.title, comment.content) if owner.id != current_user.id
-    @comments = Comment.where("post_id = ?", params[:post_id])
+    @comment = current_user.comments.new(content: params[:content], post_id: params[:post_id])
+    @comment.save_and_mail(current_user)
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    post = comment.post
-    if  comment.present?
-      comment.destroy
-      respond_to do |format|
+    if @comment.user_id == current_user.id || current_user.is_admin
+      @comment.destroy
         flash[:success] = "Comment deleted successfully"
-        format.html { redirect_to post_path(post) }
-        format.json { head :no_content }
-      end
     else
-      flash.now[:error] = "You can't delete a Comment"
+      flash[:error] = "Access denied"
+    end
+    respond_to do |format|
+      format.html { redirect_to post_path(@comment.post_id) }
+      format.json { head :no_content }
     end
   end
 end

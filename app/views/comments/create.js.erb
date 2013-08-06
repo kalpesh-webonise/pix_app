@@ -1,3 +1,3 @@
 $("#content").val('');
+$("#show_comments").prepend($("<%= j(render('/posts/comments', comments: [@comment])) %>"));
 toggleDoms($("#comment"), $(".formLoader"));
-$("#show_comments").html("<%= j render("/posts/show_comments", :comments => @comments) %>");

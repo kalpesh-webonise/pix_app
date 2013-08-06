@@ -1,4 +1,4 @@
-Hello <%= @owner.first_name%><br>
-  <%= @user_name%> posted this comment on your post. <br>
-  <strong>Re: <%= @post_title%> <br></strong><br><br>
-<%= @content%>
+Hello <%= @post_owner.first_name%><br>
+  <%= @comment_owner.first_name %> posted this comment on your post. <br>
+  <strong>Re: <%= @post.title%> <br></strong><br><br>
+<%= @comment.content %>
