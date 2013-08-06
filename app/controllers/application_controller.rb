@@ -7,9 +7,14 @@ class ApplicationController < ActionController::Base
   before_filter :fetch_required_items
 
   def fetch_required_items
-    if current_user && !request.xhr?
-      @categories = Category.select("id, name")
-      @sub_categories = SubCategory.select("id, name, category_id").group_by(&:category_id)
+    if current_user && !request.xhr? # && request.get?
+      @system_setting = SystemSetting.find_by_name("cache")
+      @categories = Rails.cache.fetch("dbCat#{@system_setting.value['category']}", expires_in: 1.week) {
+        Category.select("id, name").to_a
+      }
+      @sub_categories = Rails.cache.fetch("dbSubCat#{@system_setting.value['sub_category']}", expires_in: 1.week) {
+        SubCategory.select("id, name, category_id").group_by(&:category_id)
+      }
     end
   end
 

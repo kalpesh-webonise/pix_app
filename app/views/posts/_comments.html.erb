@@ -1,0 +1,11 @@
+<% comments.each do |comment| %>
+  <div class="commentBox" comment_id="<%= comment.id %>">
+    <span><%= simple_format comment.content %></span>
+    <span class="postedInfo">
+      Posted: <%= comment.created_at.strftime("%D %T")%> by <%= comment.user.first_name%> <%= comment.user.last_name%>
+      <% if current_user.id == comment.user_id || current_user.is_admin %>
+        <%= link_to image_tag("deletePost.gif", class: "miniDelete"), comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </span>
+  </div>
+<% end %>

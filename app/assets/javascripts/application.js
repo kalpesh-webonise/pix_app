@@ -13,7 +13,6 @@
 //= require twitter/bootstrap/bootstrap-dropdown
 //= require twitter/bootstrap/bootstrap-collapse
 //= require posts
-//= require jquery.history
 $(document).ready(function(){
   $(".back-to-top").hide();
   $('.dropdown-toggle').dropdown();
@@ -31,6 +30,16 @@ $(document).ready(function(){
   $(document).on("click", "a.page", function(){
     toggleDoms($("a.page"), $("img.page"));
   });
+  $(".starImg").click(function(){
+    var post_id=$(this).parent().attr("post_id");
+    toggleDoms($('.favouriteStatus img.favLoader'), $(".starImg"));
+    $.ajax({
+      url: "/posts/" + post_id + "/mark_favourite",
+      dataType: "SCRIPT",
+      data: {fav: $(this).hasClass("favOff")},
+      type: "PUT"
+    });
+  });
 });
 function toggleDoms(show, hide){
   show.show();
@@ -47,6 +56,5 @@ function displayFlash(message, type){
   $(".actionLoader").hide();
 }
 function highlightFilter(selector){
-  console.log(selector);
   $("#" + selector).addClass("selected");
 }

@@ -4,6 +4,10 @@ class CommentsController < ApplicationController
     @comment = Comment.new
   end
 
+  def older
+    @comments = Comment.where("post_id = ? AND id < ?", params[:post_id], params[:id]).includes(:user).select("id, content, user_id, created_at").order("created_at DESC").limit(10)
+  end
+
   def create
     comment = current_user.comments.create(content: params[:content], post_id: params[:post_id])
     owner, post = comment.post.user, comment.post

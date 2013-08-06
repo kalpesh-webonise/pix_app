@@ -13,15 +13,7 @@ PixApp::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => 'mail.weboniselab.com',
-      :user_name            => 'pansingh@weboniselab.com',
-      :password             => 'pansingh6186',
-      :authentication       => 'plain',
-      :enable_starttls_auto => true  }
+  config.action_mailer.delivery_method = :sendmail
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -39,5 +31,6 @@ PixApp::Application.configure do
   config.assets.debug = true
   #config.cache_store = :mem_cache_store, Memcached::Rails.new('localhost:11211')
   config.cache_store = :mem_cache_store, "localhost"
+  config.eager_load = false
 
 end

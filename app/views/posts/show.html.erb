@@ -23,53 +23,69 @@
   <span>Posted:<%= @post.created_at.strftime("%D %T")%> by <%= @post.user.first_name%> <%= @post.user.last_name%>  </span>
 </div>
 <div class="clearfix addCommentWrap">
-  <div class="favouriteStatus">
-    <% if current_user.favourite_post_ids.include? @post.id %>
-        <%= image_tag "/assets/starOn.png", class: "starImg"  %>
-    <% else %>
-        <span>Add to Favourite</span>
-        <%= link_to image_tag("/assets/starOff.png", class: "starImg"), mark_favourite_post_path(@post.id), class: "markFav", :remote => true %>
-    <% end %>
+  <div class="favouriteStatus" post_id="<%= @post.id %>">
+    <%= image_tag "/assets/starOn.png", class: "starImg favOn #{'dn' unless current_user.favourite_post_ids.include? @post.id}"  %>
+    <a href='javascript:void(0);' class="starImg favOff <%= 'dn' if current_user.favourite_post_ids.include? @post.id %>">
+      Add to Favourite
+      <%= image_tag "/assets/starOff.png", class: "starImg favOff" %>
+    </a>
+    <%= image_tag "loader-mini.gif", class: "dn favLoader" %>
   </div>
 
 <% unless current_user.is_admin %>
-<button type="Post" id = "go_for_comment">Add Comment </button>
+  <button type="Post" id = "go_for_comment">Add Comment </button>
 <% end %>
 </div>
 <div class = "do_comment" style = "display:none">
-<div class="addComment">
-     <textarea id="content" rows = "4" cols = "50"> </textarea>
-  <button type="Post" id = "comment">Comment </button>
-  <%= image_tag "loader-mini.gif", class: "formLoader dn" %>
+  <div class="addComment">
+    <textarea id="content" rows = "4" cols = "50"> </textarea>
+    <button type="Post" id="comment">Comment </button>
+    <%= image_tag "loader-mini.gif", class: "formLoader dn" %>
+  </div>
 </div>
+<hr>
+<strong>Recent Comments</strong>
+<div id="show_comments">
+  <% if @comments.empty? %>
+    No comments yet
+  <% else %>
+    <%= render "comments", comments: @comments %>
+  <% end %>
+  <% if @comments.length == 10 %>
+    <a class='oldComments pull-right' href="javascript:void(0);">Older comments</a>
+    <%= image_tag "loader-mini.gif", class: "pull-right dn commentLoader" %>
+  <% end %>
 </div>
-<div id="show_comments" >
-  <%= render :partial => "show_comments",:locals=>{:comments => @post.comments} %>
-</div>
-<%= link_to "<< Back to List View", request.referer %>
-<%= content_for :js do  %>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $(function(){
-                $('#comment').click(function(){
-                    var content = $("#content").val();
-                    if ($.trim(content) == "")
-                        displayFlash("Please add comment content", "alert-error");
-                    else{
-                        toggleDoms($(".formLoader"), $("#comment"));
-                        $.ajax({
-                            type: 'POST',
-                            url: '/comments',
-                            data: {content:content, post_id: '<%=@post.id%>'}
-                        });
-                    }
-                    $('.do_comment').hide();
-                });
+<%= link_to "<< Back to List View", "javascript: history.back();" %>
 
-                $('#go_for_comment').click(function(){
-                    $('.do_comment').show();
-                });
-            })
+<%= content_for :js do %>
+  <script type="text/javascript">
+    $('#comment').click(function(){
+      var content = $("#content").val();
+      if ($.trim(content) == "")
+        displayFlash("Please add comment content", "alert-error");
+      else {
+        toggleDoms($(".formLoader"), $("#comment"));
+        $.ajax({
+          type: 'POST',
+          url: '/comments',
+          data: {content:content, post_id: '<%=@post.id%>'}
         });
-    </script>
+      }
+      $('.do_comment').hide();
+    });
+    $('#go_for_comment').click(function(){
+      $('.do_comment').show();
+    });
+    $(document).on("click", ".oldComments", function(){
+      toggleDoms($(".commentLoader"), $(".oldComments"));
+      var comment_id=$("#show_comments .commentBox:last").attr("comment_id"), post_id="<%= @post.id %>";
+      $.ajax({
+        url: "/comments/"+ comment_id +"/older/"+ post_id,
+        dataType: "SCRIPT",
+        //data: {fav: $(this).hasClass("favOff")},
+        type: "GET"
+      });
+    })
+  </script>
 <% end %>

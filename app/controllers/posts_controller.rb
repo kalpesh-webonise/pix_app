@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: [:show]
+  before_action :find_post, only: [:show, :edit, :update, :destroy]
   def index
     @posts = Post.page(params[:page])
   end
 
   def show
-    @comments = @post.comments
+    @comments = @post.comments.select("id, user_id, content, created_at").includes(:user).order("created_at DESC").limit(10)
   end
 
   def new
@@ -18,37 +18,26 @@ class PostsController < ApplicationController
       flash[:success] = "Post created successfully"
       redirect_to "/dashboard"
     else
-      get_categories_sub_categories
       render 'new'
     end
   end
 
-  def get_categories_sub_categories
-    @categories = Category.select("id, name")
-    @subcategories = SubCategory.select("id, name, category_id").group_by(&:category_id)
-  end
-
   def mark_favourite
-    current_user.favourite_post_ids << params[:id].to_i
-    current_user.favourite_post_ids.uniq!
-    current_user.save
+    @dom = current_user.mark_unmark_favourite(params)
     respond_to do |format|
-      format.js{ render nothing: true}
+      format.js
     end
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    if (current_user.is_admin || @post.user.id == current_user.id) && @post.present?
-      @post.destroy
-      respond_to do |format|
-        flash[:success] = "Post deleted successfully"
-        format.html { redirect_to "/" }
-        format.json { head :no_content }
-      end
-
+    if (current_user.is_admin || @post.user_id == current_user.id) && @post.destroy
+      flash[:success] = "Post deleted successfully"
+      redirect_to "/"
     else
-      flash.now[:error] = "You can't delete a Post"
+      flash[:error] = "Unable to delete comment, please try after some time"
     end
+  end
+
+  def update
   end
 end

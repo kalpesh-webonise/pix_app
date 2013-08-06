@@ -1,0 +1,25 @@
+<table class ="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th><center>First Name</center></th>
+      <th><center>Last Name</center></th>
+      <th><center>User Email</center></th>
+      <th><center>Actions</center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><center><%= user.first_name %></center></td>
+      <td><center><%= user.last_name %></center></td>
+      <td><center><%= user.email %></center></td>
+      <td>
+        <center>
+          <%=link_to image_tag("deletePost.gif"), user, method: :delete, data: { confirm: 'Are you sure?' }, class: "deletePost" %>
+        </center>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @users, remote: true %>

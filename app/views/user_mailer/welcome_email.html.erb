@@ -1,7 +1,4 @@
-<h3 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-    xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-    xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-    xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"> Welcome User</h3>
+<h3 xmlns="http://www.w3.org/1999/html"> Welcome User</h3>
 <div>
   Dear <%=@user.first_name%> <%=@user.last_name%>,</br>
 </div>
@@ -12,14 +9,13 @@
 <div>
   <ul>
     <li>Post ads for renting a flat/room, Selling your household stuffs, Selling your vehicles, etc.</li>
-    <li>Post ads for renting a flat/room, Selling your household stuffs, Selling your vehicles, etc.</li>
     <li>View ads for different categories and sub categories.</li>
     <li>Posting comment on ads</li>
     <li>Marking ad as Favourite.</li>
   </ul>
   Your account credentials are:<br/>
-  Email:<b> <%=@user.email%></b><br/>
-  Password:<b> <%=@password%></b><br/>
+  Email: <b> <%=@user.email%></b><br/>
+  Password: <b> <%=@password%></b><br/>
   <%= link_to "Click Here", edit_user_url(@user.id) %>  to access your account.<br/>
   If you can't click the link above, you can copy the following address into your browser (in single line):<br/>
   <%=link_to edit_user_url(@user.id), edit_user_url(@user.id) %><br/>

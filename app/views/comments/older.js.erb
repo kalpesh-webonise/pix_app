@@ -1,0 +1,5 @@
+$("<%= j(render('/posts/comments', comments: @comments)) %>").insertAfter("#show_comments .commentBox:last");
+toggleDoms($(".oldComments"), $(".commentLoader"));
+<% if @comments.length < 10 %>
+  $(".oldComments").hide();
+<% end %>

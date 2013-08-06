@@ -14,7 +14,6 @@ class SubCategoriesController < ApplicationController
 
   # GET /sub_categories/1/edit
   def edit
-    #@categories = Category.select("id, name")
     @category = @sub_category.category
   end
 
@@ -31,7 +30,6 @@ class SubCategoriesController < ApplicationController
         format.html { redirect_to '/categories', notice: 'Sub category was successfully created.' }
         format.json { render action: 'show', status: :created, location: @sub_category }
       else
-        @categories = Category.select("id, name")
         format.html { render action: 'new' }
         format.json { render json: @sub_category.errors, status: :unprocessable_entity }
       end
@@ -46,7 +44,6 @@ class SubCategoriesController < ApplicationController
         format.html { redirect_to  '/categories', notice: 'Sub category was successfully updated.' }
         format.json { head :no_content }
       else
-        @categories = Category.select("id, name")
         format.html { render action: 'edit' }
         format.json { render json: @sub_category.errors, status: :unprocessable_entity }
       end
