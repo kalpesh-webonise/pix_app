@@ -12,12 +12,10 @@
 //= require twitter/bootstrap/bootstrap-button
 //= require twitter/bootstrap/bootstrap-dropdown
 //= require twitter/bootstrap/bootstrap-collapse
-//= require twitter/bootstrap/bootstrap-modal.js
-//= require bootstrap-lightbox.js
+//= require jquery.fancybox
 //= require posts
 $(document).ready(function(){
     $(".back-to-top").hide();
-    $('.dropdown-toggle').dropdown();
     $(".navbar .container ul.nav li[rel='" + $(".activeTab").text() + "']").addClass("active");
     $(document).on("click", ".pagination ul li:not(.active) a", function(){
         toggleDoms($(".pagination").next("img"), $(".pagination"));

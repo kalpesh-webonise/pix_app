@@ -18,17 +18,16 @@
 </div>
 <div>
   <span class="pull-left"><strong>Price:</strong> <%= @post.price%></span>
-  <span class="pull-right"><strong><a data-toggle="lightbox" href="#ImageLightBox" id="ShowImages" >View Images</a></strong></span>
-</div>
-
-<div id="ImageLightBox" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
-  <div class='lightbox-content'>
+  <span class="pull-right"><strong>
     <% @post.photos.each do |i| %>
-    <%=image_tag( i.image.url,:style => "vertical-align: bottom;")%>
-        <% end %>
-  </div>
+        <%= link_to "View Image", i.image.url, :class =>"fancybox", :rel => "example_group" %>
+        <% break %>
+    <% end %>
+  </strong> </span>
 </div>
-
+  <% @post.photos.drop(1).each do |i| %>
+      <%= link_to "", i.image.url,:class =>"fancybox dn", :rel => "example_group" %>
+  <% end %>
 <div></br>
   <span><strong>Posted:</strong><%= @post.created_at.strftime("%D %T")%> by <%= @post.user.first_name%> <%= @post.user.last_name%>  </span>
 </div>
@@ -87,6 +86,11 @@
         $('#go_for_comment').click(function(){
             $('.do_comment').show();
         });
+        $('#ViewImage').click(function(){
+            $('.fancybox').show();
+        });
+
+
         $(document).on("click", ".oldComments", function(){
             toggleDoms($(".commentLoader"), $(".oldComments"));
             var comment_id=$("#show_comments .commentBox:last").attr("comment_id"), post_id="<%= @post.id %>";
@@ -96,5 +100,8 @@
                 type: "GET"
             });
         })
+        $(document).ready(function(){
+            $("a.fancybox").fancybox();
+        });
     </script>
 <% end %>

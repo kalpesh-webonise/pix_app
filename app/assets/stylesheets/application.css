@@ -8,9 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require jquery.fancybox
  *= require_self
  *= require bootstrap
- *= require bootstrap-lightbox.min.css
  */
  .dn {display: none;}
  .container.body { padding-top: 50px; }
@@ -89,4 +89,3 @@ img.starImg {
 .companyImg { width: 38px; height: 38px; margin-right: 5px; }
 .companyImgThumb { width: 210px; height: 36px; margin: 11px 5px; }
 .miniDelete {width: 22px;}
-
