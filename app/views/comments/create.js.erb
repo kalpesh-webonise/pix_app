@@ -1,3 +1,5 @@
-$("#content").val('');
-$("#show_comments").prepend($("<%= j(render('/posts/comments', comments: [@comment])) %>"));
-toggleDoms($("#comment"), $(".formLoader"));
+<%- if params[:action] == 'create' %>
+  $("#content").val('');
+  toggleDoms($("#comment"), $(".formLoader"));
+<% end %>
+$("#show_comments").prepend($("<%= j(render('/posts/comments', comments: @comments)) %>"));

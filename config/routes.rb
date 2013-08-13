@@ -1,10 +1,5 @@
 PixApp::Application.routes.draw do
 
-  #resources :jobs
-
-  resources :sub_categories
-  resources :categories
-
   # Devise Routes
   authenticated :user do
     get '/' => 'dashboards#show'
@@ -13,22 +8,22 @@ PixApp::Application.routes.draw do
   devise_scope :user do
     root to: "devise/sessions#new"
   end
-
   get "/dashboard/category/:category_id" => 'dashboards#show'
   get "/dashboard/sub_category/:sub_category_id" => 'dashboards#show'
   get "/dashboard/posts/:post_type" => 'dashboards#show'
-  get "/comments/:id/older/:post_id" => 'comments#older'
-
+  resource :dashboard
   resources :posts, except: [:index]  do
     put 'mark_favourite' => 'posts#mark_favourite'
   end
-  resources :comments
-  resources :users, except: [:show] do
-    collection do
-      get :show_my_posts
-    end
-  end
-  resource :dashboard
+  get "/comments/:id/older/:post_id" => 'comments#older'
+  get "/comments/:recent_comment_id/recent/:post_id" => 'comments#recent'
+  resources :comments, only: [:create, :destroy]
+  resources :users, except: [:show]
+  resources :categories
+  resources :sub_categories
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

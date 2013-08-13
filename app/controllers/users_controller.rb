@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :require_admin!, except: [:edit, :update]
 
   def index
-    @users = User.where("is_admin = ?", false).page(params[:page]).per(1)
+    @users = User.where("is_admin = ?", false).page(params[:page]).per(10)
     respond_to do |format|
       format.html
       format.js

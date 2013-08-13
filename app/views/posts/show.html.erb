@@ -60,16 +60,21 @@
 
 <%= content_for :js do %>
   <script type="text/javascript">
+    var busy = false, post_id="<%= @post.id %>", updateTimer;
     $('#comment').click(function(){
       var content = $("#content").val();
       if ($.trim(content) == "")
         displayFlash("Please add comment content", "alert-error");
       else {
         toggleDoms($(".formLoader"), $("#comment"));
+        busy = true;
         $.ajax({
           type: 'POST',
           url: '/comments',
-          data: {content:content, post_id: '<%=@post.id%>'}
+          data: {content: content, post_id: post_id, recent_comment_id: $("#show_comments .commentBox:first").attr("comment_id")},
+          complete: function(){
+            busy = false;
+          }
         });
       }
       $('.do_comment').hide();
@@ -79,13 +84,26 @@
     });
     $(document).on("click", ".oldComments", function(){
       toggleDoms($(".commentLoader"), $(".oldComments"));
-      var comment_id=$("#show_comments .commentBox:last").attr("comment_id"), post_id="<%= @post.id %>";
+      var comment_id=$("#show_comments .commentBox:last").attr("comment_id");
       $.ajax({
         url: "/comments/"+ comment_id +"/older/"+ post_id,
         dataType: "SCRIPT",
-        //data: {fav: $(this).hasClass("favOff")},
         type: "GET"
       });
-    })
+    });
+    updateTimer = setInterval(updateComments, 20000);
+    $(window).focus(function() {
+      if (!updateTimer)
+        updateTimer = setInterval(updateComments, 20000);
+    });
+    $(window).blur(function() {
+        clearInterval(updateTimer);
+        updateTimer = false;
+    });
+    function updateComments(){
+      var url = "/comments/"+ $("#show_comments .commentBox:first").attr("comment_id") +"/recent/"+ post_id ;
+      if (!busy)
+        $.get(url);
+    }
   </script>
 <% end %>

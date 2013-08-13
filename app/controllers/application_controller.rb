@@ -38,11 +38,11 @@ class ApplicationController < ActionController::Base
       unless obj
         respond_to do |format|
           format.html{
-            flash[:alert] = "#{name.capitalize} not found"
+            flash[:alert] = "#{name.camelize} not found"
             redirect_to "/#{name.pluralize}"
           }
           format.js{
-            render js: "displayFlash('#{name.capitalize} not found', 'alert-error');"
+            render js: "displayFlash('#{name.camelize} not found', 'alert-error');"
           }
         end
       end
