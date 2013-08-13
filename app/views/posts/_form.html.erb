@@ -26,6 +26,16 @@
       <label for="field2"></span>Description<span class="mandatory-field">*</span></label>
       <%= f.text_area :description,:id => "description" %>
     </div>
+    <div class="control-group imageFiles">
+        <%= f.label "Upload Photo",:class=>"label_logo"  %>
+        <div class="controls">
+          <%=  f.fields_for :photos do |photo| %>
+            <%= photo.file_field :image ,:class=>"label_logo"  %>
+          <% end %>
+          <a href="javascript:void(0);" class="removeImg">Remove Image</a>
+        </div>
+    </div>
+    <a href="javascript:void(0);" class="addImage">Add more images</a>
 
     <div class="control-group">
       <label for="field2">Location<span class="mandatory-field">*</span></label>

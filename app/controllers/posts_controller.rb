@@ -10,6 +10,7 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.new
+    @post.photos.build
   end
 
   def create
@@ -29,6 +30,7 @@ class PostsController < ApplicationController
     end
   end
 
+
   def destroy
     if (current_user.is_admin || @post.user_id == current_user.id) && @post.destroy
       flash[:success] = "Post deleted successfully"
@@ -38,6 +40,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def update
+  private
+  def post_params
+    params.require(:post).permit(:category_id, :sub_category_id, :share, :title, :description, :location, :price, :name, :contact_number, :photos_attributes)
   end
+
 end

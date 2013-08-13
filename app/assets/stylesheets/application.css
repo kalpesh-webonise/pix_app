@@ -8,8 +8,8 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require jquery.fancybox
  *= require_self
- *=# require bootstrap_and_overrides
  *= require bootstrap
  */
  .dn {display: none;}
@@ -80,6 +80,12 @@ img.starImg {
   display: block;
   width: 600px;
 }
+
+
+.add_more_image{
+    margin: -6px 0 0 -90px;
+}
+
 .companyImg { width: 38px; height: 38px; margin-right: 5px; }
 .companyImgThumb { width: 210px; height: 36px; margin: 11px 5px; }
 .miniDelete {width: 22px;}
