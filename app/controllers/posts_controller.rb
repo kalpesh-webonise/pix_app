@@ -19,7 +19,21 @@ class PostsController < ApplicationController
       flash[:success] = "Post created successfully"
       redirect_to "/dashboard"
     else
+      @post.photos.build
       render 'new'
+    end
+  end
+
+  def edit
+    @post.photos.build
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Post was successfully updated.'
+    else
+      @post.photos.build
+      render 'edit'
     end
   end
 

@@ -4,7 +4,9 @@ class Comment < ActiveRecord::Base
   validates :user_id, :post_id, :content, presence: true
 
   def self.recent_comments recent_comment_id, post_id
-    self.where("post_id = ? AND id > ?", post_id, recent_comment_id).includes(:user).select("id, content, user_id, created_at").order("created_at DESC")
+    comments = self.where("post_id = ?", post_id).includes(:user).select("id, content, user_id, created_at").order("created_at DESC")
+    comments = comments.where("id > ?", recent_comment_id) if recent_comment_id.present?
+    comments
   end
 
   def save_and_mail(user)
