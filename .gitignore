@@ -18,3 +18,8 @@
 database.yml
 .idea/*
 *~
+OPENSHIFT/*
+LOCAL/*
+.openshift/*
+*.gitkeep
+public/uploads/*
